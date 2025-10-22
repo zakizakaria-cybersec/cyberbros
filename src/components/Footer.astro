@@ -1,0 +1,111 @@
+---
+const currentYear = new Date().getFullYear();
+
+const footerLinks = {
+  services: [
+    { name: 'Penetration Testing', href: '#services' },
+    { name: 'Security Audits', href: '#services' },
+    { name: 'Incident Response', href: '#services' },
+    { name: 'Compliance Services', href: '#services' },
+  ],
+  company: [
+    { name: 'About Us', href: '#' },
+    { name: 'Careers', href: '#' },
+    { name: 'Blog', href: '#' },
+    { name: 'Contact', href: '#contact' },
+  ],
+  legal: [
+    { name: 'Privacy Policy', href: '#' },
+    { name: 'Terms of Service', href: '#' },
+    { name: 'Cookie Policy', href: '#' },
+    { name: 'Security', href: '#' },
+  ],
+};
+
+const socialLinks = [
+  { name: 'LinkedIn', icon: '💼', href: '#' },
+  { name: 'Twitter', icon: '🐦', href: '#' },
+  { name: 'GitHub', icon: '💻', href: '#' },
+];
+---
+
+<footer class="bg-gray-900 text-gray-300">
+  <div class="container-custom py-12">
+    <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
+      <!-- Brand -->
+      <div class="lg:col-span-2">
+        <a href="/" class="text-2xl font-display font-bold text-white mb-4 block">
+          CyberBros
+        </a>
+        <p class="text-gray-400 mb-4 max-w-sm">
+          Professional cybersecurity services protecting businesses from modern threats. 
+          Your trusted partner in digital security.
+        </p>
+        <div class="flex gap-4">
+          {socialLinks.map((social) => (
+            <a 
+              href={social.href}
+              class="text-2xl hover:scale-110 transition-transform duration-200"
+              aria-label={social.name}
+            >
+              {social.icon}
+            </a>
+          ))}
+        </div>
+      </div>
+      
+      <!-- Services -->
+      <div>
+        <h3 class="font-display font-bold text-white mb-4">Services</h3>
+        <ul class="space-y-2">
+          {footerLinks.services.map((link) => (
+            <li>
+              <a href={link.href} class="hover:text-primary-400 transition-colors">
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      <!-- Company -->
+      <div>
+        <h3 class="font-display font-bold text-white mb-4">Company</h3>
+        <ul class="space-y-2">
+          {footerLinks.company.map((link) => (
+            <li>
+              <a href={link.href} class="hover:text-primary-400 transition-colors">
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      <!-- Legal -->
+      <div>
+        <h3 class="font-display font-bold text-white mb-4">Legal</h3>
+        <ul class="space-y-2">
+          {footerLinks.legal.map((link) => (
+            <li>
+              <a href={link.href} class="hover:text-primary-400 transition-colors">
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    
+    <div class="border-t border-gray-800 pt-8 mt-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-gray-400 text-sm">
+          © {currentYear} CyberBros. All rights reserved.
+        </p>
+        <p class="text-gray-400 text-sm">
+          Built with ❤️ using Astro.js
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

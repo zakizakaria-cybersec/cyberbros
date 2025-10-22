@@ -1,0 +1,77 @@
+---
+const services = [
+  {
+    title: 'Penetration Testing',
+    description: 'Comprehensive security testing to identify vulnerabilities before attackers do.',
+    icon: '🔍',
+    features: ['Network Testing', 'Web App Testing', 'API Security', 'Mobile App Testing']
+  },
+  {
+    title: 'Security Audits',
+    description: 'In-depth analysis of your security posture with actionable recommendations.',
+    icon: '📋',
+    features: ['Infrastructure Review', 'Policy Assessment', 'Compliance Check', 'Risk Analysis']
+  },
+  {
+    title: 'Incident Response',
+    description: '24/7 rapid response to security incidents and breach management.',
+    icon: '🚨',
+    features: ['Threat Detection', 'Rapid Response', 'Recovery Support', 'Forensics']
+  },
+  {
+    title: 'Security Training',
+    description: 'Educate your team on cybersecurity best practices and threat awareness.',
+    icon: '🎓',
+    features: ['Phishing Training', 'Security Workshops', 'Policy Training', 'Awareness Programs']
+  },
+  {
+    title: 'Compliance Services',
+    description: 'Meet regulatory requirements with our comprehensive compliance solutions.',
+    icon: '✅',
+    features: ['GDPR Compliance', 'ISO 27001', 'SOC 2', 'HIPAA']
+  },
+  {
+    title: 'Managed Security',
+    description: 'Ongoing security monitoring and management for continuous protection.',
+    icon: '🛡️',
+    features: ['24/7 Monitoring', 'Threat Intelligence', 'Patch Management', 'Security Updates']
+  }
+];
+---
+
+<section id="services" class="py-20 bg-white">
+  <div class="container-custom">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">
+        Our Cybersecurity Services
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Comprehensive security solutions designed to protect your business from evolving cyber threats
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {services.map((service) => (
+        <div class="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-xl hover:border-primary-500 transition-all duration-300 group">
+          <div class="text-5xl mb-4">{service.icon}</div>
+          <h3 class="text-2xl font-display font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+            {service.title}
+          </h3>
+          <p class="text-gray-600 mb-6">
+            {service.description}
+          </p>
+          <ul class="space-y-2">
+            {service.features.map((feature) => (
+              <li class="flex items-center gap-2 text-gray-700">
+                <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
