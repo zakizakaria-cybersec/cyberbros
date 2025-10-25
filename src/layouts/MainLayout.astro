@@ -1,0 +1,154 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Cybersecurity Training for Universities | Awareness & Education",
+  description = "We empower universities and educators with cybersecurity training, awareness programs, and experience sharing sessions to build a safer digital future."
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body class="bg-black text-gray-100 font-sans leading-relaxed">
+    <slot />
+
+    <!-- Global Scripts -->
+    <script>
+      // Smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const href = this.getAttribute('href');
+          if (href !== '#') {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        });
+      });
+
+      // Intersection Observer for fade-in animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      // Apply animations to sections
+      document.querySelectorAll('section').forEach((section, index) => {
+        if (index > 0) { // Skip first section (hero)
+          section.style.opacity = '0';
+          section.style.transform = 'translateY(20px)';
+          section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+          observer.observe(section);
+        }
+      });
+
+      // Animate stats counter
+      const animateCounter = (element, target) => {
+        let current = 0;
+        const increment = target / 50;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            element.textContent = target + (element.dataset.suffix || '');
+            clearInterval(timer);
+          } else {
+            element.textContent = Math.floor(current) + (element.dataset.suffix || '');
+          }
+        }, 30);
+      };
+
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+            const value = entry.target.textContent.replace(/[^0-9]/g, '');
+            if (value) { // Only animate if there's a numeric value
+              entry.target.dataset.suffix = entry.target.textContent.replace(/[0-9]/g, '');
+              animateCounter(entry.target, parseInt(value));
+              entry.target.classList.add('animated');
+            }
+          }
+        });
+      }, { threshold: 0.5 });
+
+      // Only target statistics numbers, not all bold text
+      document.querySelectorAll('section .text-4xl.font-bold.text-indigo-400').forEach(stat => {
+        statsObserver.observe(stat);
+      });
+    </script>
+
+    <style is:global>
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #000;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #4f46e5;
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #6366f1;
+      }
+
+      /* Details/Summary styling */
+      details summary::-webkit-details-marker {
+        display: none;
+      }
+
+      details[open] summary {
+        border-bottom: 1px solid rgb(31, 41, 55);
+      }
+
+      /* Hover effects for cards */
+      .group:hover {
+        transform: translateY(-2px);
+      }
+
+      /* Background grid pattern */
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+          linear-gradient(rgba(79, 70, 229, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(79, 70, 229, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+        pointer-events: none;
+        z-index: -1;
+      }
+    </style>
+  </body>
+</html>
