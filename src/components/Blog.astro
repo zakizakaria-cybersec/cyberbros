@@ -1,4 +1,12 @@
 ---
+import { getCollection } from "astro:content";
+
+// Get featured blog posts (limit to 2 for homepage)
+const allPosts = await getCollection("blog");
+const featuredPosts = allPosts
+  .filter(post => post.data.featured)
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 2);
 ---
 
 <section id="blog" class="bg-gray-900 py-20">
@@ -13,81 +21,46 @@
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-      <!-- Featured Blog Post 1 -->
-      <article class="bg-gray-800/50 border border-gray-700 rounded-lg overflow-hidden hover:border-indigo-500 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20">
-        <a href="/blog/mobsf-android-analysis" class="block">
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-2 py-1 bg-indigo-600/20 text-indigo-400 text-xs rounded-full border border-indigo-600/30">
-                #mobile-security
-              </span>
-              <span class="px-2 py-1 bg-indigo-600/20 text-indigo-400 text-xs rounded-full border border-indigo-600/30">
-                #android
-              </span>
+      <!-- Featured Blog Posts -->
+      {featuredPosts.map(post => (
+        <article class="bg-gray-800/50 border border-gray-700 rounded-lg overflow-hidden hover:border-indigo-500 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20">
+          <a href={`/blog/${post.slug}`} class="block">
+            <div class="p-6">
+              <div class="flex flex-wrap gap-2 mb-4">
+                {post.data.tags.slice(0, 2).map(tag => (
+                  <span class="px-2 py-1 bg-indigo-600/20 text-indigo-400 text-xs rounded-full border border-indigo-600/30">
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+              
+              <h3 class="text-2xl font-bold text-white mb-3 hover:text-indigo-400 transition">
+                {post.data.title}
+              </h3>
+              
+              <p class="text-gray-400 mb-4">
+                {post.data.description}
+              </p>
+              
+              <div class="flex items-center justify-between text-sm text-gray-500">
+                <time datetime={post.data.publishDate.toISOString()}>
+                  {post.data.publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </time>
+                <span>{post.data.readTime}</span>
+              </div>
             </div>
             
-            <h3 class="text-2xl font-bold text-white mb-3 hover:text-indigo-400 transition">
-              MobSF: Android App Security Analysis
-            </h3>
-            
-            <p class="text-gray-400 mb-4">
-              Discover how to use Mobile Security Framework (MobSF) for comprehensive Android application security testing.
-            </p>
-            
-            <div class="flex items-center justify-between text-sm text-gray-500">
-              <time datetime="2025-10-26">October 26, 2025</time>
-              <span>12 min read</span>
-            </div>
-          </div>
-          
-          <div class="px-6 pb-6">
-            <span class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition">
-              Read more
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </span>
-          </div>
-        </a>
-      </article>
-
-      <!-- Featured Blog Post 2 -->
-      <article class="bg-gray-800/50 border border-gray-700 rounded-lg overflow-hidden hover:border-indigo-500 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20">
-        <a href="/blog/fuzzing-with-radamsa" class="block">
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-2 py-1 bg-indigo-600/20 text-indigo-400 text-xs rounded-full border border-indigo-600/30">
-                #fuzzing
-              </span>
-              <span class="px-2 py-1 bg-indigo-600/20 text-indigo-400 text-xs rounded-full border border-indigo-600/30">
-                #security-testing
+            <div class="px-6 pb-6">
+              <span class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition">
+                Read more
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
               </span>
             </div>
-            
-            <h3 class="text-2xl font-bold text-white mb-3 hover:text-indigo-400 transition">
-              Fuzzing with Radamsa: A Practical Guide
-            </h3>
-            
-            <p class="text-gray-400 mb-4">
-              Learn how to use Radamsa, a powerful fuzzing tool, to discover security vulnerabilities through automated testing.
-            </p>
-            
-            <div class="flex items-center justify-between text-sm text-gray-500">
-              <time datetime="2025-10-26">October 26, 2025</time>
-              <span>8 min read</span>
-            </div>
-          </div>
-          
-          <div class="px-6 pb-6">
-            <span class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition">
-              Read more
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </span>
-          </div>
-        </a>
-      </article>
+          </a>
+        </article>
+      ))}
 
       <!-- Placeholder Post (Coming Soon) -->
       <article class="bg-gray-800/30 border border-gray-700/50 rounded-lg overflow-hidden opacity-60">
