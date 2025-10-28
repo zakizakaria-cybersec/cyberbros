@@ -22,14 +22,42 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    const recipientEmail = import.meta.env.CONTACT_EMAIL;
+    // Try multiple places for the CONTACT_EMAIL so this works across
+    // build-time (import.meta.env) and runtime (Cloudflare Worker bindings).
+    let recipientEmail = '';
+    let emailSource = 'none';
 
-    // TEMP DEBUG: log presence (boolean) so we can confirm runtime visibility
-    // Do NOT log the actual value (may be sensitive) — only log whether it's present.
-    console.log('CONTACT_EMAIL present?', Boolean(recipientEmail));
+    // 1) Vite / Astro build replacement
+    try {
+      // use a guarded access to avoid TS errors if import.meta isn't available
+      // @ts-ignore
+      const v = typeof import !== 'undefined' && typeof import.meta !== 'undefined' ? (import.meta as any).env?.CONTACT_EMAIL : undefined;
+      if (v) {
+        recipientEmail = String(v);
+        emailSource = 'import.meta.env';
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    // 2) Node/process (local dev)
+    if (!recipientEmail && typeof process !== 'undefined' && process.env?.CONTACT_EMAIL) {
+      recipientEmail = String(process.env.CONTACT_EMAIL);
+      emailSource = 'process.env';
+    }
+
+    // 3) Cloudflare Workers / Pages runtime binding (wrangler "vars") may be exposed
+    // on the global scope. Try globalThis as a last-resort lookup.
+    if (!recipientEmail && typeof globalThis !== 'undefined' && (globalThis as any).CONTACT_EMAIL) {
+      recipientEmail = String((globalThis as any).CONTACT_EMAIL);
+      emailSource = 'globalThis';
+    }
+
+    // TEMP DEBUG: log presence (boolean) and which source was used. Do NOT log the raw email value.
+    console.log('CONTACT_EMAIL present?', Boolean(recipientEmail), 'source:', emailSource);
 
     if (!recipientEmail || recipientEmail === 'your-email@example.com') {
-      console.error('CONTACT_EMAIL environment variable not configured');
+      console.error('CONTACT_EMAIL environment variable not configured (no value found in import.meta.env, process.env, or globalThis)');
       return new Response(
         JSON.stringify({ error: 'Email service not configured. Please contact the administrator.' }),
         { status: 500, headers: { 'Content-Type': 'application/json' } }
