@@ -29,9 +29,10 @@ export const POST: APIRoute = async ({ request }) => {
 
     // 1) Vite / Astro build replacement
     try {
-      // use a guarded access to avoid TS errors if import.meta isn't available
-      // @ts-ignore
-      const v = typeof import !== 'undefined' && typeof import.meta !== 'undefined' ? (import.meta as any).env?.CONTACT_EMAIL : undefined;
+      // Access `import.meta.env` directly inside a try/catch to avoid
+      // syntax/runtime issues across different bundlers/runtimes.
+      // @ts-ignore - import.meta is injected by Vite/Astro at build time
+      const v = (import.meta as any)?.env?.CONTACT_EMAIL;
       if (v) {
         recipientEmail = String(v);
         emailSource = 'import.meta.env';
