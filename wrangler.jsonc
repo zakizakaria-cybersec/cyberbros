@@ -1,5 +1,8 @@
 {
   "name": "cyberbros",
   "compatibility_date": "2025-10-24",
-  "pages_build_output_dir": "./dist"
+  "pages_build_output_dir": "./dist",
+  "vars": {
+    "CONTACT_EMAIL": "bidguru94@gmail.com"
+  }
 }

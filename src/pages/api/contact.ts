@@ -23,7 +23,11 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const recipientEmail = import.meta.env.CONTACT_EMAIL;
-    
+
+    // TEMP DEBUG: log presence (boolean) so we can confirm runtime visibility
+    // Do NOT log the actual value (may be sensitive) — only log whether it's present.
+    console.log('CONTACT_EMAIL present?', Boolean(recipientEmail));
+
     if (!recipientEmail || recipientEmail === 'your-email@example.com') {
       console.error('CONTACT_EMAIL environment variable not configured');
       return new Response(
