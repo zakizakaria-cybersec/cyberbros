@@ -54,54 +54,70 @@
   const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
   const formMessage = document.getElementById('formMessage') as HTMLDivElement;
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    // Disable submit button
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
-    
-    // Hide previous messages
-    formMessage.classList.add('hidden');
-    
-    // Get form data
-    const formData = new FormData(form);
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      institution: formData.get('institution'),
-      message: formData.get('message'),
-    };
-    
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+  if (form && submitBtn && formMessage) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
       
-      const result = await response.json();
+      // Disable submit button
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
       
-      if (response.ok) {
-        // Success
-        formMessage.textContent = result.message || 'Message sent successfully! We\'ll get back to you soon.';
-        formMessage.className = 'p-3 rounded-md text-sm bg-green-900 text-green-200 border border-green-700';
-        form.reset();
-      } else {
-        // Error
-        formMessage.textContent = result.error || 'Failed to send message. Please try again.';
+      // Hide previous messages
+      formMessage.classList.add('hidden');
+      
+      // Get form data
+      const formData = new FormData(form);
+      const data = {
+        name: formData.get('name') as string,
+        email: formData.get('email') as string,
+        institution: formData.get('institution') as string,
+        message: formData.get('message') as string,
+      };
+      
+      console.log('Submitting form data:', { ...data, email: '***' }); // Debug log
+      
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+        
+        console.log('Response status:', response.status); // Debug log
+        
+        let result;
+        try {
+          result = await response.json();
+        } catch (parseError) {
+          console.error('Failed to parse response:', parseError);
+          throw new Error('Invalid server response');
+        }
+        
+        if (response.ok) {
+          // Success
+          formMessage.textContent = result.message || 'Message sent successfully! We\'ll get back to you soon.';
+          formMessage.className = 'p-3 rounded-md text-sm bg-green-900 text-green-200 border border-green-700';
+          form.reset();
+        } else {
+          // Error
+          console.error('Server error:', result);
+          formMessage.textContent = result.error || 'Failed to send message. Please try again.';
+          formMessage.className = 'p-3 rounded-md text-sm bg-red-900 text-red-200 border border-red-700';
+        }
+      } catch (error) {
+        console.error('Network error:', error);
+        formMessage.textContent = 'Network error. Please check your connection and try again.';
         formMessage.className = 'p-3 rounded-md text-sm bg-red-900 text-red-200 border border-red-700';
+      } finally {
+        // Re-enable submit button
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+        formMessage.classList.remove('hidden');
       }
-    } catch (error) {
-      formMessage.textContent = 'Network error. Please check your connection and try again.';
-      formMessage.className = 'p-3 rounded-md text-sm bg-red-900 text-red-200 border border-red-700';
-    } finally {
-      // Re-enable submit button
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Send Message';
-      formMessage.classList.remove('hidden');
-    }
-  });
+    });
+  } else {
+    console.error('Contact form elements not found');
+  }
 </script>
