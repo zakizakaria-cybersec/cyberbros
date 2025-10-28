@@ -22,7 +22,15 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    const recipientEmail = import.meta.env.CONTACT_EMAIL || 'your-email@example.com';
+    const recipientEmail = import.meta.env.CONTACT_EMAIL;
+    
+    if (!recipientEmail || recipientEmail === 'your-email@example.com') {
+      console.error('CONTACT_EMAIL environment variable not configured');
+      return new Response(
+        JSON.stringify({ error: 'Email service not configured. Please contact the administrator.' }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
 
     // Send email using MailChannels (free on Cloudflare Workers/Pages)
     const response = await fetch('https://api.mailchannels.net/tx/v1/send', {
@@ -73,7 +81,9 @@ ${message}
     });
 
     if (!response.ok) {
-      throw new Error('Failed to send email');
+      const errorText = await response.text();
+      console.error('MailChannels error:', response.status, errorText);
+      throw new Error(`Failed to send email: ${response.status} - ${errorText}`);
     }
 
     return new Response(
@@ -82,8 +92,12 @@ ${message}
     );
   } catch (error) {
     console.error('Contact form error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return new Response(
-      JSON.stringify({ error: 'Failed to send message. Please try again later.' }),
+      JSON.stringify({ 
+        error: 'Failed to send message. Please try again later.',
+        details: errorMessage // This will help debug in production logs
+      }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
