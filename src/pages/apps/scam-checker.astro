@@ -42,11 +42,22 @@ import MainLayout from '../../layouts/MainLayout.astro';
         </div>
       </div>
 
+      <!-- Progress Bar -->
+      <div class="mb-8">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-sm text-gray-400">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">12</span></span>
+          <span class="text-sm text-indigo-400"><span id="progressPercent">0</span>% Complete</span>
+        </div>
+        <div class="w-full bg-gray-800 rounded-full h-2">
+          <div id="progressBar" class="bg-gradient-to-r from-indigo-600 to-purple-600 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+        </div>
+      </div>
+
       <!-- Form -->
       <form id="scamCheckerForm" class="space-y-8">
         
         <!-- Payment Method -->
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="1">
           <label class="block text-white font-semibold mb-4 text-lg">
             <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">1</span>
             Payment Method Requested
@@ -116,7 +127,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
         </div>
 
         <!-- Timeline Pressure -->
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="2">
           <label class="block text-white font-semibold mb-4 text-lg">
             <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">2</span>
             Timeline Pressure
@@ -160,7 +171,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
         </div>
 
         <!-- Communication Method -->
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="3">
           <label class="block text-white font-semibold mb-4 text-lg">
             <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">3</span>
             Initial Contact Method
@@ -212,7 +223,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
         </div>
 
         <!-- Email Domain -->
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="4">
           <label class="block text-white font-semibold mb-4 text-lg">
             <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">4</span>
             Email Domain Type
@@ -256,7 +267,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
         </div>
 
         <!-- Deal Quality -->
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="5">
           <label class="block text-white font-semibold mb-4 text-lg">
             <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">5</span>
             Deal vs Market Rate
@@ -296,7 +307,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
         </div>
 
         <!-- Documentation -->
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="6">
           <label class="block text-white font-semibold mb-4 text-lg">
             <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">6</span>
             Documentation Willingness
@@ -336,7 +347,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
         </div>
 
         <!-- Identity Verification -->
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="7">
           <label class="block text-white font-semibold mb-4 text-lg">
             <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">7</span>
             Identity Verification Status
@@ -380,7 +391,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
         </div>
 
         <!-- Communication Quality -->
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="8">
           <label class="block text-white font-semibold mb-4 text-lg">
             <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">8</span>
             Communication Style
@@ -424,7 +435,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
         </div>
 
         <!-- Meeting Willingness -->
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="9">
           <label class="block text-white font-semibold mb-4 text-lg">
             <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">9</span>
             Meeting Willingness
@@ -468,7 +479,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
         </div>
 
         <!-- References -->
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="10">
           <label class="block text-white font-semibold mb-4 text-lg">
             <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">10</span>
             References & Testimonials
@@ -512,7 +523,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
         </div>
 
         <!-- Unusual Requests -->
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="11">
           <label class="block text-white font-semibold mb-4 text-lg">
             <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">11</span>
             Unusual Requests
@@ -556,7 +567,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
         </div>
 
         <!-- Representative -->
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="12">
           <label class="block text-white font-semibold mb-4 text-lg">
             <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">12</span>
             Who Are You Dealing With?
@@ -599,18 +610,39 @@ import MainLayout from '../../layouts/MainLayout.astro';
           </div>
         </div>
 
-        <!-- Submit Button -->
-        <div class="pt-6">
+        <!-- Navigation Buttons -->
+        <div class="flex justify-between items-center pt-6 gap-4">
+          <button 
+            type="button"
+            id="prevBtn"
+            class="flex items-center bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-all font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            Previous
+          </button>
+          
+          <button 
+            type="button"
+            id="nextBtn"
+            class="flex items-center bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-indigo-500 hover:to-purple-500 transition-all font-semibold disabled:opacity-50 disabled:cursor-not-allowed ml-auto"
+          >
+            Next
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+
           <button 
             type="submit"
-            class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-5 rounded-xl hover:from-indigo-500 hover:to-purple-500 transition-all font-semibold text-lg shadow-lg hover:shadow-indigo-500/50 transform hover:scale-[1.02]"
+            id="submitBtn"
+            class="hidden flex items-center bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-5 rounded-xl hover:from-indigo-500 hover:to-purple-500 transition-all font-semibold text-lg shadow-lg hover:shadow-indigo-500/50 transform hover:scale-[1.02]"
           >
-            <span class="inline-flex items-center">
-              <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
-              </svg>
-              Analyze Risk Level
-            </span>
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+            </svg>
+            Analyze Risk Level
           </button>
         </div>
       </form>
@@ -664,6 +696,27 @@ import MainLayout from '../../layouts/MainLayout.astro';
   </div>
 
   <style>
+    /* Question card display control */
+    .question-card {
+      display: none;
+      animation: slideInCard 0.5s ease-out;
+    }
+
+    .question-card.active {
+      display: block;
+    }
+
+    @keyframes slideInCard {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
     .option-btn {
       background-color: rgb(31 41 55);
       border: 2px solid rgb(75 85 99);
@@ -800,6 +853,85 @@ import MainLayout from '../../layouts/MainLayout.astro';
   </style>
 
   <script>
+    // Flashcard navigation
+    let currentQuestionIndex = 1;
+    const totalQuestions = 12;
+
+    function updateQuestionDisplay() {
+      // Hide all questions
+      document.querySelectorAll('.question-card').forEach(card => {
+        card.classList.remove('active');
+      });
+
+      // Show current question
+      const currentCard = document.querySelector(`.question-card[data-question="${currentQuestionIndex}"]`);
+      if (currentCard) {
+        currentCard.classList.add('active');
+      }
+
+      // Update progress
+      document.getElementById('currentQuestion').textContent = currentQuestionIndex;
+      const progressPercent = Math.round((currentQuestionIndex / totalQuestions) * 100);
+      document.getElementById('progressPercent').textContent = progressPercent;
+      document.getElementById('progressBar').style.width = `${progressPercent}%`;
+
+      // Update button states
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const submitBtn = document.getElementById('submitBtn');
+
+      prevBtn.disabled = currentQuestionIndex === 1;
+
+      // Check if current question is answered
+      const currentField = getCurrentFieldName();
+      const isAnswered = document.querySelector(`input[name="${currentField}"]`)?.value;
+
+      if (currentQuestionIndex === totalQuestions) {
+        nextBtn.classList.add('hidden');
+        submitBtn.classList.remove('hidden');
+        submitBtn.disabled = !isAnswered;
+      } else {
+        nextBtn.classList.remove('hidden');
+        submitBtn.classList.add('hidden');
+        nextBtn.disabled = !isAnswered;
+      }
+    }
+
+    function getCurrentFieldName() {
+      const fieldMap = {
+        1: 'paymentMethod',
+        2: 'timeline',
+        3: 'contactMethod',
+        4: 'emailDomain',
+        5: 'dealQuality',
+        6: 'documentation',
+        7: 'verification',
+        8: 'communication',
+        9: 'meeting',
+        10: 'references',
+        11: 'unusualRequests',
+        12: 'representative'
+      };
+      return fieldMap[currentQuestionIndex];
+    }
+
+    function nextQuestion() {
+      if (currentQuestionIndex < totalQuestions) {
+        currentQuestionIndex++;
+        updateQuestionDisplay();
+        // Scroll to top of form smoothly
+        document.getElementById('scamCheckerForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQuestionIndex > 1) {
+        currentQuestionIndex--;
+        updateQuestionDisplay();
+        document.getElementById('scamCheckerForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
     // Educational content for each option
     const educationalContent = {
       paymentMethod: {
@@ -894,6 +1026,13 @@ import MainLayout from '../../layouts/MainLayout.astro';
 
     // Handle button selections
     document.addEventListener('DOMContentLoaded', () => {
+      // Initialize first question
+      updateQuestionDisplay();
+
+      // Navigation button handlers
+      document.getElementById('prevBtn')?.addEventListener('click', prevQuestion);
+      document.getElementById('nextBtn')?.addEventListener('click', nextQuestion);
+
       const allOptionButtons = document.querySelectorAll('.option-btn, .option-btn-full');
       
       allOptionButtons.forEach(button => {
@@ -931,6 +1070,17 @@ import MainLayout from '../../layouts/MainLayout.astro';
               }, 100);
             }
           }
+
+          // Update button states after selection
+          updateQuestionDisplay();
+
+          // Optional: Auto-advance to next question after a short delay
+          // Uncomment the lines below if you want automatic progression
+          // setTimeout(() => {
+          //   if (currentQuestionIndex < totalQuestions) {
+          //     nextQuestion();
+          //   }
+          // }, 800);
         });
       });
     });
