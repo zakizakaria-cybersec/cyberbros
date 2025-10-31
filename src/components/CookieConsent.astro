@@ -3,45 +3,40 @@
 // Compliant with Malaysian PDPA requirements
 ---
 
-<div id="cookieConsent" class="fixed bottom-0 left-0 right-0 z-50 hidden">
-  <div class="bg-gradient-to-r from-gray-950 to-gray-900 border-t-2 border-indigo-600 shadow-2xl">
-    <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div id="cookieConsent" class="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-md z-50 hidden">
+  <div class="bg-gradient-to-br from-gray-900 to-gray-950 border border-gray-700 rounded-xl shadow-2xl backdrop-blur-sm">
+    <div class="px-5 py-4">
+      <div class="flex flex-col gap-3">
         <!-- Cookie Icon and Text -->
-        <div class="flex items-start gap-4 flex-1">
-          <div class="flex-shrink-0 text-3xl">🍪</div>
+        <div class="flex items-start gap-3">
+          <div class="flex-shrink-0 text-2xl">🍪</div>
           <div class="flex-1">
-            <h3 class="text-white font-semibold mb-2">Cookie Consent</h3>
             <p class="text-gray-300 text-sm leading-relaxed">
-              We use cookies to enhance your browsing experience, analyze website traffic, and understand where our visitors are coming from. 
-              Essential cookies are required for the website to function properly. By clicking "Accept All", you consent to our use of cookies. 
-              You can customize your preferences or decline non-essential cookies.
-            </p>
-            <p class="text-gray-400 text-xs mt-2">
-              Learn more in our <a href="/privacy-policy" class="text-indigo-400 hover:text-indigo-300 underline">Privacy Policy</a>.
+              We use cookies to improve your experience. Essential cookies keep things running smoothly. 
+              <a href="/privacy-policy" class="text-indigo-400 hover:text-indigo-300 underline">Learn more</a>
             </p>
           </div>
         </div>
         
         <!-- Action Buttons -->
-        <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+        <div class="flex flex-wrap gap-2">
+          <button 
+            id="cookieAccept" 
+            class="flex-1 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-lg transition"
+          >
+            Accept
+          </button>
           <button 
             id="cookieSettings" 
-            class="px-5 py-2.5 bg-gray-800 hover:bg-gray-700 text-white text-sm font-medium rounded-lg transition border border-gray-700 whitespace-nowrap"
+            class="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white text-sm font-medium rounded-lg transition border border-gray-600"
           >
-            ⚙️ Customize
+            Settings
           </button>
           <button 
             id="cookieReject" 
-            class="px-5 py-2.5 bg-gray-800 hover:bg-gray-700 text-white text-sm font-medium rounded-lg transition border border-gray-700 whitespace-nowrap"
+            class="px-4 py-2 text-gray-400 hover:text-gray-300 text-sm font-medium transition"
           >
-            Reject Optional
-          </button>
-          <button 
-            id="cookieAccept" 
-            class="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white text-sm font-semibold rounded-lg transition shadow-lg whitespace-nowrap"
-          >
-            ✓ Accept All
+            Decline
           </button>
         </div>
       </div>
