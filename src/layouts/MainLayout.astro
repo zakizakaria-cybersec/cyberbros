@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import CookieConsent from "../components/CookieConsent.astro";
 
 interface Props {
   title?: string;
@@ -132,6 +133,9 @@ const {
   </head>
   <body class="bg-black text-gray-100 font-sans leading-relaxed">
     <slot />
+    
+    <!-- Cookie Consent Banner -->
+    <CookieConsent />
 
     <!-- Global Scripts -->
     <script>

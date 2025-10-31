@@ -36,6 +36,25 @@
         class="bg-gray-900 border border-gray-700 text-gray-200 rounded-md px-4 py-2 h-24 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none placeholder-gray-500"
       ></textarea>
       
+      <!-- PDPA Compliance Notice and Consent -->
+      <div class="bg-gray-900/50 border border-gray-700 rounded-md p-4 text-sm">
+        <p class="text-gray-400 mb-3 leading-relaxed">
+          <strong class="text-white">Data Protection Notice:</strong> By submitting this form, your personal data (name, email, institution, and message) will be collected and processed by CyberBros Security to respond to your inquiry. Your data will be stored securely and used only for this purpose. You have the right to access, correct, or request deletion of your data at any time.
+        </p>
+        <label class="flex items-start gap-3 cursor-pointer group">
+          <input 
+            type="checkbox" 
+            name="consent"
+            id="consentCheckbox"
+            required
+            class="mt-1 w-4 h-4 text-indigo-600 bg-gray-800 border-gray-600 rounded focus:ring-indigo-500 focus:ring-2 cursor-pointer"
+          />
+          <span class="text-gray-300 group-hover:text-gray-200 transition">
+            I consent to the collection and processing of my personal data as described above and have read the <a href="/privacy-policy" target="_blank" class="text-indigo-400 hover:text-indigo-300 underline">Privacy Policy</a> and <a href="/terms-of-service" target="_blank" class="text-indigo-400 hover:text-indigo-300 underline">Terms of Service</a>. <span class="text-red-400">*</span>
+          </span>
+        </label>
+      </div>
+      
       <div id="formMessage" class="hidden p-3 rounded-md text-sm"></div>
       
       <button 
@@ -67,11 +86,24 @@
       
       // Get form data
       const formData = new FormData(form);
+      const consent = formData.get('consent');
+      
+      // Validate consent checkbox
+      if (!consent) {
+        formMessage.textContent = 'Please provide consent to process your personal data.';
+        formMessage.className = 'p-3 rounded-md text-sm bg-red-900 text-red-200 border border-red-700';
+        formMessage.classList.remove('hidden');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+        return;
+      }
+      
       const data = {
         name: formData.get('name') as string,
         email: formData.get('email') as string,
         institution: formData.get('institution') as string,
         message: formData.get('message') as string,
+        consent: true,
       };
       
       console.log('Submitting form data:', { ...data, email: '***' }); // Debug log

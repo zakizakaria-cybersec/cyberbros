@@ -8,12 +8,20 @@ interface Env {
 export const POST: APIRoute = async ({ request, locals }) => {
   try {
     const data = await request.json();
-    const { name, email, institution, message } = data;
+    const { name, email, institution, message, consent } = data;
 
     // Validate required fields
     if (!name || !email || !message) {
       return new Response(
         JSON.stringify({ error: 'Name, email, and message are required' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Validate PDPA consent
+    if (!consent) {
+      return new Response(
+        JSON.stringify({ error: 'You must provide consent to process your personal data as required by Malaysian PDPA 2010' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -73,6 +81,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
           <p><strong>Institution:</strong> ${institution || 'Not provided'}</p>
           <h3>Message:</h3>
           <p>${message.replace(/\n/g, '<br>')}</p>
+          <hr style="margin: 20px 0; border: none; border-top: 1px solid #ccc;">
+          <p style="font-size: 12px; color: #666;">
+            <strong>PDPA Compliance:</strong> User has provided consent for data processing as required by Malaysian PDPA 2010.
+            <br>Consent obtained on: ${new Date().toISOString()}
+          </p>
         `,
       }),
     });
