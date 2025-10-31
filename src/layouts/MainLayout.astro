@@ -4,11 +4,15 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  keywords?: string;
+  canonicalURL?: string;
 }
 
 const {
-  title = "Cybersecurity Training for Universities | Awareness & Education",
-  description = "We empower universities and educators with cybersecurity training, awareness programs, and experience sharing sessions to build a safer digital future."
+  title = "Cybersecurity Services Malaysia | Training for Universities & SMEs | CyberBros",
+  description = "Leading cybersecurity training provider in Malaysia specializing in universities and SMEs. Expert security awareness programs, ethical hacking courses, secure coding training, and cybersecurity education across Kuala Lumpur, Selangor, and Malaysia.",
+  keywords = "cybersecurity services Malaysia, cybersecurity training Malaysia, security training universities Malaysia, SME cybersecurity Malaysia, ethical hacking Malaysia, security awareness training, cybersecurity education Malaysia, IT security training KL, infosec training Malaysia, secure coding Malaysia",
+  canonicalURL = new URL(Astro.url.pathname, Astro.site)
 } = Astro.props;
 ---
 
@@ -19,6 +23,20 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Geo Meta Tags for Malaysia -->
+    <meta name="geo.region" content="MY" />
+    <meta name="geo.placename" content="Kuala Lumpur, Malaysia" />
+    <meta name="geo.position" content="3.139003;101.686855" />
+    <meta name="ICBM" content="3.139003, 101.686855" />
+    
+    <!-- Additional SEO Tags -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="CyberBros Security" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
     
     <!-- Favicon - Order matters for browser compatibility -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -34,14 +52,83 @@ const {
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="CyberBros Security" />
+    <meta property="og:locale" content="en_MY" />
     
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    
+    <!-- Schema.org Organization JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "CyberBros Security",
+        "alternateName": "CyberBros",
+        "url": "https://cyberbrosecurity.work",
+        "logo": "https://cyberbrosecurity.work/logo.png",
+        "description": "Leading cybersecurity services provider in Malaysia specializing in training for universities and SMEs",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Kuala Lumpur",
+          "addressRegion": "Kuala Lumpur",
+          "addressCountry": "MY"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "Malaysia"
+        },
+        "serviceArea": {
+          "@type": "State",
+          "name": "Malaysia"
+        },
+        "knowsAbout": [
+          "Cybersecurity",
+          "Security Training",
+          "Ethical Hacking",
+          "Security Awareness",
+          "Mobile Security",
+          "Secure Coding",
+          "Security Education"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Cybersecurity Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Cybersecurity Training for Universities",
+                "description": "Comprehensive cybersecurity training programs for Malaysian universities and educational institutions"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "SME Cybersecurity Services",
+                "description": "Security assessment and training services for small and medium enterprises in Malaysia"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Security Awareness Training",
+                "description": "Professional security awareness and training programs for organizations"
+              }
+            }
+          ]
+        }
+      }
+    </script>
   </head>
   <body class="bg-black text-gray-100 font-sans leading-relaxed">
     <slot />
