@@ -1,0 +1,1240 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout 
+  title="Business Exchange Scam Checker - CyberBros" 
+  description="Check your business transactions for scam indicators and red flags. Free tool to help protect your business from fraud."
+>
+  <div class="bg-gradient-to-br from-gray-900 via-black to-gray-900 min-h-screen py-12">
+    <div class="max-w-4xl mx-auto px-6">
+      
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <a href="/apps" class="inline-flex items-center text-indigo-400 hover:text-indigo-300 mb-6 transition">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Back to Apps
+        </a>
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+          Business Exchange <span class="text-indigo-400">Scam Checker</span>
+        </h1>
+        <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+          Answer the following questions about your business transaction to receive a risk assessment. 
+          This tool helps identify common scam indicators and red flags.
+        </p>
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="bg-yellow-900/20 border border-yellow-700/50 rounded-lg p-4 mb-8">
+        <div class="flex items-start">
+          <svg class="w-6 h-6 text-yellow-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+          <div>
+            <h3 class="text-yellow-400 font-semibold mb-1">Disclaimer</h3>
+            <p class="text-gray-300 text-sm">
+              This tool provides general guidance only and should not be considered as professional advice. 
+              Always conduct thorough due diligence and consult with professionals for significant business transactions.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <form id="scamCheckerForm" class="space-y-8">
+        
+        <!-- Payment Method -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+          <label class="block text-white font-semibold mb-4 text-lg">
+            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">1</span>
+            Payment Method Requested
+            <span class="text-red-400 ml-1">*</span>
+          </label>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <button type="button" class="option-btn has-tooltip" data-field="paymentMethod" data-value="gift-cards">
+              <span class="text-2xl mb-1">🎁</span>
+              <span class="text-sm">Gift Cards</span>
+              <span class="tooltip">🚨 Nearly ALWAYS a scam! No legitimate business uses gift cards for payments.</span>
+            </button>
+            <button type="button" class="option-btn has-tooltip" data-field="paymentMethod" data-value="cryptocurrency">
+              <span class="text-2xl mb-1">₿</span>
+              <span class="text-sm">Crypto</span>
+              <span class="tooltip">⚠️ High risk - irreversible transactions. Scammers love crypto because payments can't be recovered.</span>
+            </button>
+            <button type="button" class="option-btn has-tooltip" data-field="paymentMethod" data-value="wire-transfer">
+              <span class="text-2xl mb-1">💸</span>
+              <span class="text-sm">Wire Transfer</span>
+              <span class="tooltip">⚠️ Risky - difficult to reverse. Used in many business email compromise scams.</span>
+            </button>
+            <button type="button" class="option-btn has-tooltip" data-field="paymentMethod" data-value="bank-transfer">
+              <span class="text-2xl mb-1">🏦</span>
+              <span class="text-sm">Bank Transfer</span>
+              <span class="tooltip">✓ Relatively safe but verify account details carefully. Use for known parties only.</span>
+            </button>
+            <button type="button" class="option-btn has-tooltip" data-field="paymentMethod" data-value="check">
+              <span class="text-2xl mb-1">📝</span>
+              <span class="text-sm">Check</span>
+              <span class="tooltip">⚠️ Check scams are common! Banks in Malaysia process checks in 2-3 days - even if money appears, it can bounce later.</span>
+            </button>
+            <button type="button" class="option-btn has-tooltip" data-field="paymentMethod" data-value="cod">
+              <span class="text-2xl mb-1">💵</span>
+              <span class="text-sm">Cash/COD</span>
+              <span class="tooltip">✓ Safe for in-person transactions. Meet in public places for valuable items.</span>
+            </button>
+            <button type="button" class="option-btn has-tooltip" data-field="paymentMethod" data-value="credit-card">
+              <span class="text-2xl mb-1">💳</span>
+              <span class="text-sm">Credit Card</span>
+              <span class="tooltip">✓ Safest option - chargeback protection available if fraud occurs.</span>
+            </button>
+            <button type="button" class="option-btn has-tooltip" data-field="paymentMethod" data-value="escrow">
+              <span class="text-2xl mb-1">🔒</span>
+              <span class="text-sm">Escrow</span>
+              <span class="tooltip">✓ Very safe - funds held by third party until transaction completes. Best for large transactions.</span>
+            </button>
+            <button type="button" class="option-btn has-tooltip" data-field="paymentMethod" data-value="money-order">
+              <span class="text-2xl mb-1">📬</span>
+              <span class="text-sm">Money Order</span>
+              <span class="tooltip">⚠️ Can be counterfeited. Similar risks to checks - funds can appear then disappear.</span>
+            </button>
+          </div>
+          <input type="hidden" name="paymentMethod" required />
+          
+          <!-- Educational Info Box (appears when option selected) -->
+          <div id="info-paymentMethod" class="info-box hidden mt-4 bg-indigo-900/20 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+            <div class="flex items-start">
+              <svg class="w-6 h-6 text-indigo-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <div class="flex-1">
+                <h4 class="text-indigo-300 font-semibold mb-2">💡 Did You Know?</h4>
+                <div id="info-content-paymentMethod" class="text-gray-300 text-sm leading-relaxed"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Pressure -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+          <label class="block text-white font-semibold mb-4 text-lg">
+            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">2</span>
+            Timeline Pressure
+            <span class="text-red-400 ml-1">*</span>
+          </label>
+          <div class="flex flex-col gap-3">
+            <button type="button" class="option-btn-full has-tooltip" data-field="timeline" data-value="immediate">
+              <span class="text-xl mr-2">⚡</span> Immediate / Within hours
+              <span class="tooltip">🚨 MAJOR RED FLAG! Scammers create urgency to prevent you from thinking clearly or doing research.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="timeline" data-value="same-day">
+              <span class="text-xl mr-2">📅</span> Same day
+              <span class="tooltip">⚠️ Suspicious urgency. Legitimate businesses usually allow time for decision-making.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="timeline" data-value="few-days">
+              <span class="text-xl mr-2">⏱️</span> Within a few days
+              <span class="tooltip">⚡ Some pressure but manageable. Still be cautious - ensure you have time for due diligence.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="timeline" data-value="week">
+              <span class="text-xl mr-2">📆</span> Within a week
+              <span class="tooltip">✓ Reasonable timeframe for most business transactions.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="timeline" data-value="flexible">
+              <span class="text-xl mr-2">✅</span> Flexible / No pressure
+              <span class="tooltip">✓ Best scenario - shows confidence and professionalism. You have time to verify everything.</span>
+            </button>
+          </div>
+          <input type="hidden" name="timeline" required />
+          
+          <div id="info-timeline" class="info-box hidden mt-4 bg-indigo-900/20 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+            <div class="flex items-start">
+              <svg class="w-6 h-6 text-indigo-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <div class="flex-1">
+                <h4 class="text-indigo-300 font-semibold mb-2">💡 Did You Know?</h4>
+                <div id="info-content-timeline" class="text-gray-300 text-sm leading-relaxed"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Communication Method -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+          <label class="block text-white font-semibold mb-4 text-lg">
+            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">3</span>
+            Initial Contact Method
+            <span class="text-red-400 ml-1">*</span>
+          </label>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <button type="button" class="option-btn-full has-tooltip" data-field="contactMethod" data-value="unsolicited-email">
+              <span class="text-xl mr-2">📧</span> Unsolicited Email
+              <span class="tooltip">⚠️ Common scam vector. Check sender carefully - look for spoofed addresses and phishing attempts.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="contactMethod" data-value="unsolicited-call">
+              <span class="text-xl mr-2">📞</span> Unsolicited Call
+              <span class="tooltip">⚠️ Cold calls for business deals are suspicious. Scammers use pressure tactics over the phone.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="contactMethod" data-value="sms">
+              <span class="text-xl mr-2">💬</span> SMS/Text
+              <span class="tooltip">🚨 Very suspicious! Professional businesses rarely initiate via SMS. Often phishing "smishing" scams.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="contactMethod" data-value="social-media">
+              <span class="text-xl mr-2">📱</span> Social Media
+              <span class="tooltip">⚠️ Exercise caution. Verify account authenticity - scammers create fake business profiles.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="contactMethod" data-value="business-platform">
+              <span class="text-xl mr-2">💼</span> Business Platform
+              <span class="tooltip">✓ Safer option. Platforms like LinkedIn provide some verification, but still verify independently.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="contactMethod" data-value="referral">
+              <span class="text-xl mr-2">🤝</span> Referral
+              <span class="tooltip">✓ Good sign. Verify the referral is genuine by contacting the referrer through known channels.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="contactMethod" data-value="company-website">
+              <span class="text-xl mr-2">🌐</span> Company Website
+              <span class="tooltip">✓ Best option. You initiated contact, reducing scam risk. Still verify website legitimacy.</span>
+            </button>
+          </div>
+          <input type="hidden" name="contactMethod" required />
+          
+          <div id="info-contactMethod" class="info-box hidden mt-4 bg-indigo-900/20 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+            <div class="flex items-start">
+              <svg class="w-6 h-6 text-indigo-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <div class="flex-1">
+                <h4 class="text-indigo-300 font-semibold mb-2">💡 Did You Know?</h4>
+                <div id="info-content-contactMethod" class="text-gray-300 text-sm leading-relaxed"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email Domain -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+          <label class="block text-white font-semibold mb-4 text-lg">
+            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">4</span>
+            Email Domain Type
+            <span class="text-red-400 ml-1">*</span>
+          </label>
+          <div class="flex flex-col gap-3">
+            <button type="button" class="option-btn-full has-tooltip" data-field="emailDomain" data-value="free-email">
+              <span class="text-xl mr-2">📮</span> Free Email (Gmail, Yahoo, etc.)
+              <span class="tooltip">⚠️ Professional businesses use company domains. Free emails suggest individual operators or scams.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="emailDomain" data-value="suspicious">
+              <span class="text-xl mr-2">⚠️</span> Suspicious/Misspelled Domain
+              <span class="tooltip">🚨 MAJOR RED FLAG! Typosquatting (maybenk.com, facebookk.com) is a classic phishing technique.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="emailDomain" data-value="new-domain">
+              <span class="text-xl mr-2">🆕</span> Very New Domain
+              <span class="tooltip">⚠️ Domains registered recently (less than 6 months) are often created for scams then abandoned.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="emailDomain" data-value="company-domain">
+              <span class="text-xl mr-2">✅</span> Legitimate Company Domain
+              <span class="tooltip">✓ Good sign. Verify the domain matches official company website. Check domain registration age.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="emailDomain" data-value="no-email">
+              <span class="text-xl mr-2">❌</span> No Email Provided
+              <span class="tooltip">🚨 Every legitimate business has email. This is extremely suspicious for any business transaction.</span>
+            </button>
+          </div>
+          <input type="hidden" name="emailDomain" required />
+          
+          <div id="info-emailDomain" class="info-box hidden mt-4 bg-indigo-900/20 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+            <div class="flex items-start">
+              <svg class="w-6 h-6 text-indigo-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <div class="flex-1">
+                <h4 class="text-indigo-300 font-semibold mb-2">💡 Did You Know?</h4>
+                <div id="info-content-emailDomain" class="text-gray-300 text-sm leading-relaxed"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deal Quality -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+          <label class="block text-white font-semibold mb-4 text-lg">
+            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">5</span>
+            Deal vs Market Rate
+            <span class="text-red-400 ml-1">*</span>
+          </label>
+          <div class="flex flex-col gap-3">
+            <button type="button" class="option-btn-full has-tooltip" data-field="dealQuality" data-value="too-good">
+              <span class="text-xl mr-2">🚩</span> Too Good to Be True
+              <span class="tooltip">🚨 Classic scam indicator! If it seems too good, it probably is. Scammers hook victims with irresistible offers.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="dealQuality" data-value="better">
+              <span class="text-xl mr-2">⬆️</span> Slightly Better
+              <span class="tooltip">⚡ Can be legitimate but verify carefully. Ensure there's a logical reason for the better price.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="dealQuality" data-value="market-rate">
+              <span class="text-xl mr-2">✅</span> At Market Rate
+              <span class="tooltip">✓ Good sign. Fair pricing suggests legitimate transaction. Still verify other factors.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="dealQuality" data-value="slightly-worse">
+              <span class="text-xl mr-2">⬇️</span> Slightly Worse
+              <span class="tooltip">⚠️ Unusual. While less suspicious than too-good deals, understand why pricing is higher.</span>
+            </button>
+          </div>
+          <input type="hidden" name="dealQuality" required />
+          
+          <div id="info-dealQuality" class="info-box hidden mt-4 bg-indigo-900/20 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+            <div class="flex items-start">
+              <svg class="w-6 h-6 text-indigo-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <div class="flex-1">
+                <h4 class="text-indigo-300 font-semibold mb-2">💡 Did You Know?</h4>
+                <div id="info-content-dealQuality" class="text-gray-300 text-sm leading-relaxed"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Documentation -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+          <label class="block text-white font-semibold mb-4 text-lg">
+            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">6</span>
+            Documentation Willingness
+            <span class="text-red-400 ml-1">*</span>
+          </label>
+          <div class="flex flex-col gap-3">
+            <button type="button" class="option-btn-full has-tooltip" data-field="documentation" data-value="refuses">
+              <span class="text-xl mr-2">🚫</span> Refuses Documentation
+              <span class="tooltip">🚨 CRITICAL RED FLAG! Legitimate businesses always provide documentation. This suggests fraud.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="documentation" data-value="vague">
+              <span class="text-xl mr-2">📄</span> Vague Documents
+              <span class="tooltip">⚠️ Unprofessional or unclear documents may indicate illegitimate operations or attempts to deceive.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="documentation" data-value="willing">
+              <span class="text-xl mr-2">📋</span> Provides Documentation
+              <span class="tooltip">✓ Good sign. Review documents carefully - check for inconsistencies and have lawyer review if high value.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="documentation" data-value="professional">
+              <span class="text-xl mr-2">✅</span> Professional Contracts
+              <span class="tooltip">✓ Excellent sign. Professional contracts show commitment and legal accountability.</span>
+            </button>
+          </div>
+          <input type="hidden" name="documentation" required />
+          
+          <div id="info-documentation" class="info-box hidden mt-4 bg-indigo-900/20 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+            <div class="flex items-start">
+              <svg class="w-6 h-6 text-indigo-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <div class="flex-1">
+                <h4 class="text-indigo-300 font-semibold mb-2">💡 Did You Know?</h4>
+                <div id="info-content-documentation" class="text-gray-300 text-sm leading-relaxed"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Identity Verification -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+          <label class="block text-white font-semibold mb-4 text-lg">
+            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">7</span>
+            Identity Verification Status
+            <span class="text-red-400 ml-1">*</span>
+          </label>
+          <div class="flex flex-col gap-3">
+            <button type="button" class="option-btn-full has-tooltip" data-field="verification" data-value="no-info">
+              <span class="text-xl mr-2">❓</span> No Verifiable Info
+              <span class="tooltip">🚨 CRITICAL! Cannot verify who you're dealing with. Extremely high risk of scam.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="verification" data-value="inconsistent">
+              <span class="text-xl mr-2">⚠️</span> Inconsistent Info
+              <span class="tooltip">🚨 Major red flag! Changing stories or mismatched information indicates deception.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="verification" data-value="minimal">
+              <span class="text-xl mr-2">🔍</span> Minimal Presence
+              <span class="tooltip">⚠️ Limited online footprint. Could be new business or attempt to hide identity.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="verification" data-value="verified">
+              <span class="text-xl mr-2">✔️</span> Successfully Verified
+              <span class="tooltip">✓ Identity confirmed through SSM, website, reviews. Good sign for legitimacy.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="verification" data-value="established">
+              <span class="text-xl mr-2">🏢</span> Established Business
+              <span class="tooltip">✓ Long track record and verifiable history. Lowest risk option.</span>
+            </button>
+          </div>
+          <input type="hidden" name="verification" required />
+          
+          <div id="info-verification" class="info-box hidden mt-4 bg-indigo-900/20 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+            <div class="flex items-start">
+              <svg class="w-6 h-6 text-indigo-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <div class="flex-1">
+                <h4 class="text-indigo-300 font-semibold mb-2">💡 Did You Know?</h4>
+                <div id="info-content-verification" class="text-gray-300 text-sm leading-relaxed"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Communication Quality -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+          <label class="block text-white font-semibold mb-4 text-lg">
+            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">8</span>
+            Communication Style
+            <span class="text-red-400 ml-1">*</span>
+          </label>
+          <div class="flex flex-col gap-3">
+            <button type="button" class="option-btn-full has-tooltip" data-field="communication" data-value="poor">
+              <span class="text-xl mr-2">📝</span> Poor Grammar/Spelling
+              <span class="tooltip">⚠️ Unprofessional communication often indicates scam operations or illegitimate businesses.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="communication" data-value="evasive">
+              <span class="text-xl mr-2">🤐</span> Evasive/Avoids Questions
+              <span class="tooltip">🚨 Avoiding direct answers suggests something to hide. Major warning sign!</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="communication" data-value="pressuring">
+              <span class="text-xl mr-2">😤</span> Aggressive/Pressuring
+              <span class="tooltip">🚨 High-pressure tactics are classic scam behavior. Legitimate businesses don't pressure you.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="communication" data-value="normal">
+              <span class="text-xl mr-2">💼</span> Professional
+              <span class="tooltip">✓ Clear, respectful communication is expected from legitimate businesses.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="communication" data-value="excellent">
+              <span class="text-xl mr-2">⭐</span> Excellent/Transparent
+              <span class="tooltip">✓ Best scenario. Transparent, detailed responses show confidence and professionalism.</span>
+            </button>
+          </div>
+          <input type="hidden" name="communication" required />
+          
+          <div id="info-communication" class="info-box hidden mt-4 bg-indigo-900/20 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+            <div class="flex items-start">
+              <svg class="w-6 h-6 text-indigo-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <div class="flex-1">
+                <h4 class="text-indigo-300 font-semibold mb-2">💡 Did You Know?</h4>
+                <div id="info-content-communication" class="text-gray-300 text-sm leading-relaxed"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Meeting Willingness -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+          <label class="block text-white font-semibold mb-4 text-lg">
+            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">9</span>
+            Meeting Willingness
+            <span class="text-red-400 ml-1">*</span>
+          </label>
+          <div class="flex flex-col gap-3">
+            <button type="button" class="option-btn-full has-tooltip" data-field="meeting" data-value="refuses">
+              <span class="text-xl mr-2">🚫</span> Refuses to Meet
+              <span class="tooltip">🚨 Extremely suspicious! Scammers refuse face-to-face contact to hide their identity.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="meeting" data-value="text-only">
+              <span class="text-xl mr-2">💬</span> Text Only
+              <span class="tooltip">⚠️ Text-only limits accountability. Professional businesses communicate via multiple channels.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="meeting" data-value="phone-only">
+              <span class="text-xl mr-2">📞</span> Phone Only
+              <span class="tooltip">⚠️ Phone-only restricts verification. May use voice changers or spoof caller ID.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="meeting" data-value="video-willing">
+              <span class="text-xl mr-2">📹</span> Video Call
+              <span class="tooltip">✓ Good compromise. Video helps verify identity and build trust for remote transactions.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="meeting" data-value="in-person">
+              <span class="text-xl mr-2">🤝</span> In-Person Meeting
+              <span class="tooltip">✓ Best option! In-person meetings in public places provide highest verification and safety.</span>
+            </button>
+          </div>
+          <input type="hidden" name="meeting" required />
+          
+          <div id="info-meeting" class="info-box hidden mt-4 bg-indigo-900/20 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+            <div class="flex items-start">
+              <svg class="w-6 h-6 text-indigo-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <div class="flex-1">
+                <h4 class="text-indigo-300 font-semibold mb-2">💡 Did You Know?</h4>
+                <div id="info-content-meeting" class="text-gray-300 text-sm leading-relaxed"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- References -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+          <label class="block text-white font-semibold mb-4 text-lg">
+            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">10</span>
+            References & Testimonials
+            <span class="text-red-400 ml-1">*</span>
+          </label>
+          <div class="flex flex-col gap-3">
+            <button type="button" class="option-btn-full has-tooltip" data-field="references" data-value="refuses">
+              <span class="text-xl mr-2">🚫</span> Refuses/Defensive
+              <span class="tooltip">🚨 Major warning! Legitimate businesses happily provide references. Refusal suggests poor history.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="references" data-value="fake">
+              <span class="text-xl mr-2">🎭</span> Fake References
+              <span class="tooltip">🚨 FRAUD! Creating fake reviews/references is clear evidence of scam operation.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="references" data-value="limited">
+              <span class="text-xl mr-2">📝</span> Limited References
+              <span class="tooltip">⚡ Could be new business. Verify the few references they have thoroughly.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="references" data-value="provides">
+              <span class="text-xl mr-2">✅</span> Verifiable References
+              <span class="tooltip">✓ Good sign. Contact references independently to verify their legitimacy and experiences.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="references" data-value="extensive">
+              <span class="text-xl mr-2">⭐</span> Extensive Track Record
+              <span class="tooltip">✓ Excellent! Long history of satisfied customers indicates reliability and trustworthiness.</span>
+            </button>
+          </div>
+          <input type="hidden" name="references" required />
+          
+          <div id="info-references" class="info-box hidden mt-4 bg-indigo-900/20 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+            <div class="flex items-start">
+              <svg class="w-6 h-6 text-indigo-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <div class="flex-1">
+                <h4 class="text-indigo-300 font-semibold mb-2">💡 Did You Know?</h4>
+                <div id="info-content-references" class="text-gray-300 text-sm leading-relaxed"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Unusual Requests -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+          <label class="block text-white font-semibold mb-4 text-lg">
+            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">11</span>
+            Unusual Requests
+            <span class="text-red-400 ml-1">*</span>
+          </label>
+          <div class="flex flex-col gap-3">
+            <button type="button" class="option-btn-full has-tooltip" data-field="unusualRequests" data-value="lie-to-others">
+              <span class="text-xl mr-2">🚨</span> Asks to Lie to Others
+              <span class="tooltip">🚨 STOP IMMEDIATELY! Asking you to lie is ALWAYS a scam. This is criminal activity!</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="unusualRequests" data-value="secrecy">
+              <span class="text-xl mr-2">🤫</span> Demands Secrecy
+              <span class="tooltip">🚨 Huge red flag! Legitimate deals don't require secrecy. This is isolation tactic.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="unusualRequests" data-value="personal-info">
+              <span class="text-xl mr-2">🔑</span> Requests Excessive Personal Info
+              <span class="tooltip">⚠️ Identity theft risk! Only provide necessary information. Never share OTP, PIN, or passwords.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="unusualRequests" data-value="minor-concerns">
+              <span class="text-xl mr-2">⚠️</span> Some Minor Concerns
+              <span class="tooltip">⚡ Trust your instincts. If something feels off, investigate further before proceeding.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="unusualRequests" data-value="none">
+              <span class="text-xl mr-2">✅</span> No Unusual Requests
+              <span class="tooltip">✓ Good! All requests seem reasonable and professional. Still maintain standard caution.</span>
+            </button>
+          </div>
+          <input type="hidden" name="unusualRequests" required />
+          
+          <div id="info-unusualRequests" class="info-box hidden mt-4 bg-indigo-900/20 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+            <div class="flex items-start">
+              <svg class="w-6 h-6 text-indigo-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <div class="flex-1">
+                <h4 class="text-indigo-300 font-semibold mb-2">💡 Did You Know?</h4>
+                <div id="info-content-unusualRequests" class="text-gray-300 text-sm leading-relaxed"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Representative -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all">
+          <label class="block text-white font-semibold mb-4 text-lg">
+            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">12</span>
+            Who Are You Dealing With?
+            <span class="text-red-400 ml-1">*</span>
+          </label>
+          <div class="flex flex-col gap-3">
+            <button type="button" class="option-btn-full has-tooltip" data-field="representative" data-value="direct-owner">
+              <span class="text-xl mr-2">👤</span> Direct Business Owner
+              <span class="tooltip">✓ Best scenario - clear accountability. Verify ownership through SSM records.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="representative" data-value="authorized-rep">
+              <span class="text-xl mr-2">💼</span> Authorized Representative
+              <span class="tooltip">✓ Normal for companies. Request authorization letter and verify with company directly.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="representative" data-value="unclear-rep">
+              <span class="text-xl mr-2">❓</span> Unclear Who They Represent
+              <span class="tooltip">⚠️ Suspicious! You need to know exactly who you're dealing with. Demand clarification.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="representative" data-value="multiple-people">
+              <span class="text-xl mr-2">👥</span> Multiple People, Unclear Roles
+              <span class="tooltip">⚠️ Confusing structure may indicate scam network. Get clear organizational chart.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="representative" data-value="keeps-changing">
+              <span class="text-xl mr-2">🔄</span> Person Keeps Changing
+              <span class="tooltip">🚨 Major red flag! Constantly changing contacts suggests disorganized scam operation.</span>
+            </button>
+          </div>
+          <input type="hidden" name="representative" required />
+          
+          <div id="info-representative" class="info-box hidden mt-4 bg-indigo-900/20 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+            <div class="flex items-start">
+              <svg class="w-6 h-6 text-indigo-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <div class="flex-1">
+                <h4 class="text-indigo-300 font-semibold mb-2">💡 Did You Know?</h4>
+                <div id="info-content-representative" class="text-gray-300 text-sm leading-relaxed"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="pt-6">
+          <button 
+            type="submit"
+            class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-5 rounded-xl hover:from-indigo-500 hover:to-purple-500 transition-all font-semibold text-lg shadow-lg hover:shadow-indigo-500/50 transform hover:scale-[1.02]"
+          >
+            <span class="inline-flex items-center">
+              <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+              </svg>
+              Analyze Risk Level
+            </span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Results Section (Hidden Initially) -->
+      <div id="results" class="hidden mt-12">
+        <div id="resultCard" class="border rounded-xl p-8">
+          <div class="text-center mb-6">
+            <div id="riskBadge" class="inline-block px-6 py-3 rounded-full text-2xl font-bold mb-4"></div>
+            <h2 class="text-3xl font-bold text-white mb-2">Risk Assessment Results</h2>
+            <p id="riskScore" class="text-xl text-gray-300"></p>
+          </div>
+          
+          <div id="riskExplanation" class="bg-gray-900 border border-gray-700 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-white mb-3">Assessment Summary</h3>
+            <p id="summaryText" class="text-gray-300"></p>
+          </div>
+
+          <div id="redFlags" class="bg-gray-900 border border-gray-700 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-white mb-3 flex items-center">
+              <svg class="w-6 h-6 text-red-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+              </svg>
+              Red Flags Detected
+            </h3>
+            <ul id="redFlagsList" class="space-y-2"></ul>
+          </div>
+
+          <div id="recommendations" class="bg-gray-900 border border-gray-700 rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-semibold text-white mb-3 flex items-center">
+              <svg class="w-6 h-6 text-indigo-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Recommendations
+            </h3>
+            <ul id="recommendationsList" class="space-y-2"></ul>
+          </div>
+
+          <div class="text-center">
+            <button 
+              onclick="location.reload()"
+              class="bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors font-semibold"
+            >
+              Check Another Transaction
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <style>
+    .option-btn {
+      background-color: rgb(31 41 55);
+      border: 2px solid rgb(75 85 99);
+      color: rgb(209 213 219);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      transition: all 0.3s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: 500;
+      position: relative;
+    }
+    
+    .option-btn:hover {
+      border-color: rgb(99 102 241);
+      background-color: rgb(55 65 81);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+    }
+    
+    .option-btn.selected {
+      background-color: rgba(79, 70, 229, 0.2);
+      border-color: rgb(99 102 241);
+      color: white;
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5);
+    }
+    
+    .option-btn.selected:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4), 0 0 0 2px rgba(99, 102, 241, 0.5);
+    }
+    
+    .option-btn-full {
+      background-color: rgb(31 41 55);
+      border: 2px solid rgb(75 85 99);
+      color: rgb(209 213 219);
+      border-radius: 0.5rem;
+      padding: 1rem 1.25rem;
+      transition: all 0.3s;
+      cursor: pointer;
+      text-align: left;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    
+    .option-btn-full:hover {
+      border-color: rgb(99 102 241);
+      background-color: rgb(55 65 81);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+    }
+    
+    .option-btn-full.selected {
+      background-color: rgba(79, 70, 229, 0.2);
+      border-color: rgb(99 102 241);
+      color: white;
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5);
+    }
+    
+    .option-btn-full.selected:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4), 0 0 0 2px rgba(99, 102, 241, 0.5);
+    }
+
+    /* Tooltip Styles */
+    .has-tooltip .tooltip {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      background-color: rgb(17, 24, 39);
+      color: rgb(243, 244, 246);
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      line-height: 1.4;
+      white-space: normal;
+      width: max-content;
+      max-width: 280px;
+      z-index: 1000;
+      border: 1px solid rgb(99 102 241);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+      text-align: left;
+      pointer-events: none;
+    }
+
+    .has-tooltip .tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: rgb(99 102 241);
+    }
+
+    .has-tooltip:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+      transform: translateX(-50%) translateY(-12px);
+    }
+
+    @media (max-width: 768px) {
+      .has-tooltip .tooltip {
+        max-width: 220px;
+        font-size: 0.8125rem;
+      }
+    }
+
+    /* Info Box Animation */
+    .info-box {
+      animation: slideIn 0.4s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+
+  <script>
+    // Educational content for each option
+    const educationalContent = {
+      paymentMethod: {
+        'gift-cards': '<strong>Gift Card Scams:</strong> This is the #1 payment method for scammers. No legitimate business will EVER ask for payment via gift cards (iTunes, Google Play, Steam, etc.). Once you provide the codes, your money is gone forever with zero recourse. In Malaysia, this tactic is used in phone scams where fraudsters impersonate government officials or banks.',
+        'cryptocurrency': '<strong>Cryptocurrency Risks:</strong> Crypto transactions are irreversible and mostly untraceable. Scammers love crypto because victims cannot get refunds. In Malaysia, many investment scams (like fake "Macau Scams") now request crypto payments. Only use crypto with parties you completely trust.',
+        'wire-transfer': '<strong>Wire Transfer Dangers:</strong> Wire transfers (Western Union, MoneyGram) are nearly impossible to reverse. Business Email Compromise (BEC) scams often trick companies into wiring money to fraudulent accounts. Always verify recipient details through a separate communication channel.',
+        'bank-transfer': '<strong>Bank Transfer Safety:</strong> Local bank transfers (like FPX, online banking) offer some protection in Malaysia. However, verify the account holder name matches the business. Be wary of personal accounts for business transactions. Banks can sometimes help recover funds if fraud is reported quickly.',
+        'check': '<strong>Check Scam Alert:</strong> In Malaysia, checks take 2-3 business days to clear. Scammers exploit this by having you ship goods or transfer money before the check bounces. Even if money appears in your account initially, the bank can reverse it days later. Common in overpayment scams where the scammer "accidentally" overpays and asks for a refund.',
+        'cod': '<strong>Cash on Delivery:</strong> The safest for in-person transactions. Meet in public places like malls or bank lobbies. For valuable items, consider meeting at a police station. Inspect items thoroughly before paying. Never agree to COD at private locations.',
+        'credit-card': '<strong>Credit Card Protection:</strong> Credit cards offer the best buyer protection in Malaysia. You can dispute charges (chargeback) if goods aren\'t delivered or are fraudulent. However, never share your CVV, PIN, or OTP codes - banks will NEVER ask for these.',
+        'escrow': '<strong>Escrow Services:</strong> Escrow holds funds until both parties fulfill their obligations. Ideal for large transactions (property, vehicles, expensive equipment). In Malaysia, use licensed escrow services. Verify the escrow company is legitimate - scammers create fake escrow sites.',
+        'money-order': '<strong>Money Order Risks:</strong> Similar to checks - they can be counterfeited. Takes days to verify authenticity. The overpayment scam commonly uses fake money orders. Banks may initially accept them, then reverse payment when fraud is discovered.'
+      },
+      timeline: {
+        'immediate': '<strong>The Urgency Tactic:</strong> Scammers create artificial urgency to prevent rational thinking. Phrases like "offer expires in 1 hour" or "act now or lose money" are manipulation tactics. Legitimate businesses respect your need for due diligence. In Malaysia, Macau Scam operators use extreme urgency, claiming police will arrest you within hours if you don\'t pay.',
+        'same-day': '<strong>Pressure to Rush:</strong> Same-day deadlines don\'t allow proper verification. Red flag if combined with high-value transactions. Professional businesses understand that major decisions require time for consultation, legal review, and background checks.',
+        'few-days': '<strong>Limited Time Frame:</strong> A few days is better but still restrictive for complex transactions. Use this time wisely: verify credentials, check company registration with SSM (Malaysia\'s business registry), read reviews, and consult professionals if needed.',
+        'week': '<strong>Reasonable Timeline:</strong> A week allows proper due diligence for most transactions. Use this time to: verify business registration, check references, review contracts carefully, and research the company\'s reputation online.',
+        'flexible': '<strong>No Pressure = Good Sign:</strong> Legitimate businesses are confident in their offerings and don\'t use pressure tactics. Flexibility shows professionalism and respect for your decision-making process. Take your time to research thoroughly.'
+      },
+      contactMethod: {
+        'unsolicited-email': '<strong>Email Scam Awareness:</strong> Phishing emails are extremely common in Malaysia. Check for: misspelled domains (e.g., "maybenk.com" instead of "maybank.com"), generic greetings, urgent threats, suspicious links. Hover over links before clicking. Call the company directly using publicly listed numbers to verify.',
+        'unsolicited-call': '<strong>Phone Scam Warning:</strong> Cold calls for business deals are rare. The "Macau Scam" in Malaysia uses unsolicited calls with caller ID spoofing to impersonate police, banks, or government agencies. Never give personal info over the phone. Hang up and call back using official numbers.',
+        'sms': '<strong>SMS Phishing (Smishing):</strong> Legitimate businesses rarely initiate business deals via SMS. Common in Malaysia: fake bank alerts, delivery notifications with malicious links, or prize winnings. Never click links in unexpected SMS messages. Verify through official channels.',
+        'social-media': '<strong>Social Media Verification:</strong> Fake business profiles are common on Facebook, Instagram, WhatsApp. Verify the blue checkmark for official accounts. Scammers clone legitimate business pages. Always verify through the company\'s official website before transacting.',
+        'business-platform': '<strong>LinkedIn & Professional Platforms:</strong> While more legitimate, scammers use fake profiles even here. Check the person\'s connections, endorsements, activity history, and years on platform. Message mutual connections to verify identity.',
+        'referral': '<strong>Verify Referrals:</strong> Contact the person who referred you through a known channel (not the contact info provided by the new party). Scammers impersonate acquaintances. In Malaysia, WhatsApp account hijacking is common - always verify with a phone call.',
+        'company-website': '<strong>Website Verification:</strong> Check domain age (use whois lookup), look for contact info, verify SSL certificate (padlock icon), check for professional design and grammar. Scam sites are often new and poorly made. Cross-reference contact info with SSM records.'
+      },
+      emailDomain: {
+        'free-email': '<strong>Free Email Red Flag:</strong> Established businesses in Malaysia invest in professional email (e.g., name@company.com.my). Using Gmail/Yahoo suggests: 1) Not a registered business, 2) Trying to hide identity, 3) Temporary operation. Exceptions: very small startups or sole proprietors, but verify thoroughly. Ask why they don\'t have company email.',
+        'suspicious': '<strong>Typosquatting Attack:</strong> Scammers register domains similar to legitimate ones (maybenk.com vs maybank.com.my, cimb.com.com). Always verify exact spelling. In Malaysia, legitimate companies use .com.my or .my domains. Check: letter substitution (rn vs m), extra letters, wrong extensions (.com vs .com.my). Report suspicious domains to CyberSecurity Malaysia.',
+        'new-domain': '<strong>Domain Age Matters:</strong> You can check domain age at whois.domaintools.com. Scammers create new domains because: 1) Old scam domains get blacklisted, 2) They abandon sites after scamming. Red flags: Domain less than 6 months old + high-value deal + pressure to act fast. Legitimate businesses have established domains.',
+        'company-domain': '<strong>Verify Company Domains:</strong> Even with company domains, verify: 1) Visit their official website directly (don\'t click email links), 2) Compare email address with website contact page, 3) Check SSM (Companies Commission of Malaysia) for business registration, 4) Call the company using publicly listed numbers to confirm the person exists. Email spoofing is possible.',
+        'no-email': '<strong>No Email = Major Warning:</strong> Every legitimate business has email in 2025. Operating without email suggests: 1) Deliberately hiding identity, 2) Planning to disappear, 3) Not a real business. This is especially suspicious in Malaysia where even small businesses use email. Only communicate via phone/WhatsApp is a massive red flag.'
+      },
+      dealQuality: {
+        'too-good': '<strong>"Too Good to Be True" Rule:</strong> This is the #1 psychological hook scammers use. Examples in Malaysia: Properties 50% below market, investment returns of 20%/month, luxury goods at 70% off, job offers with huge salaries for minimal work. The scammer creates urgency around the "amazing deal" so you don\'t think rationally. Always ask: Why would they offer ME this deal? What\'s the catch? Research market rates thoroughly.',
+        'better': '<strong>Better Pricing - Verify Why:</strong> Legitimate reasons for better pricing: Bulk purchase discounts, end-of-season sales, company liquidation, damaged packaging. Ask for explanation. Be wary if combined with urgency or requests for unusual payment methods. In Malaysia, compare with prices on Lazada, Shopee, or official retailers.',
+        'market-rate': '<strong>Fair Market Pricing:</strong> At-market pricing is a positive indicator of legitimate business. Research current rates: Check Mudah.my for property/vehicles, compare prices across multiple sellers, consult industry price guides. Scammers sometimes use market rates but combine it with other red flags (pressure, suspicious payment methods).',
+        'slightly-worse': '<strong>Higher Than Market:</strong> Sometimes legitimate for: Premium service, specialized expertise, convenience fees, authorized dealers with warranty. However, if significantly overpriced + aggressive sales tactics, it could be a pressure scam. Always compare multiple quotes before deciding.'
+      },
+      documentation: {
+        'refuses': '<strong>No Documentation = No Deal:</strong> In Malaysia, legitimate transactions require documentation: Sales agreements, invoices, receipts, contracts. Refusing documentation means: 1) No legal recourse if scammed, 2) Can\'t prove transaction occurred, 3) Likely fraud. Even small transactions should have receipts. Walk away immediately if they refuse formal documentation.',
+        'vague': '<strong>Watch for Vague Documents:</strong> Red flags in documents: Missing company registration number (SSM), vague terms and conditions, spelling errors, mismatched names/addresses, missing contact information, no signatures or stamps. Professional documents have: Clear terms, legal company details, specific amounts and dates, proper formatting. Have documents reviewed by a lawyer for large transactions.',
+        'willing': '<strong>Review Documents Thoroughly:</strong> When they provide documentation: 1) Verify company details with SSM database (Companies Commission of Malaysia), 2) Check if addresses/phone numbers match official records, 3) Look for revision history or metadata in digital docs, 4) Compare with standard industry contracts, 5) Take time to read everything before signing - don\'t be pressured.',
+        'professional': '<strong>Professional Contracts Are Essential:</strong> Good contracts include: Clear parties identification (IC/Registration #), specific terms and conditions, payment schedules, delivery timelines, dispute resolution procedures, governing law (usually Malaysian law), signatures and dates, witness signatures for large amounts. In Malaysia, stamping may be required for certain agreements.'
+      },
+      verification: {
+        'no-info': '<strong>No Verification = Huge Risk:</strong> In Malaysia, verify businesses through: 1) <strong>SSM (Companies Commission of Malaysia)</strong> - search company registration at ssm.com.my, 2) Google the business name and check for reviews/complaints, 3) Check if address is real (use Google Maps Street View), 4) Verify phone numbers match official listings. Cannot verify identity? Don\'t transact. It\'s that simple.',
+        'inconsistent': '<strong>Inconsistent Information Alert:</strong> Red flags: Name spelling changes, different addresses in documents vs website, phone numbers don\'t match, person\'s role keeps changing, business name variations. Scammers create fake identities with inconsistencies. Test them: Ask the same question twice in different ways, check if stories align, verify details independently.',
+        'minimal': '<strong>Limited Digital Footprint:</strong> New businesses may have minimal presence, but should still have: Basic website or social media, some Google results, contact information. Be extra cautious with: No reviews anywhere, can\'t find any information online, social media created very recently, no physical address. Request additional verification for substantial transactions.',
+        'verified': '<strong>How to Verify Properly:</strong> Verification checklist: ✓ SSM registration confirmed, ✓ Website matches business details, ✓ Address verified (if physical location, visit or Google Street View), ✓ Phone number from independent source, ✓ Reviews on multiple platforms (Google, Facebook), ✓ Social media has activity history (not just created), ✓ Business email domain matches website.',
+        'established': '<strong>Established Business Benefits:</strong> Companies with long history offer: 1) More accountability - can\'t easily disappear, 2) Verifiable track record, 3) Assets/reputation at stake, 4) Better legal recourse if issues arise. Check how long in business via SSM registration date, check news articles/press releases, look for awards or industry recognition. Still be vigilant - even established companies have fraudulent employees.'
+      },
+      communication: {
+        'poor': '<strong>Poor Communication Warning:</strong> Professional businesses proofread their communications. Poor grammar/spelling suggests: 1) Overseas scam operation (common from Africa, Eastern Europe), 2) Mass-sent automated messages, 3) Unprofessional operation. In Malaysia, even small businesses communicate clearly. Exceptions: Individual seller with language barriers, but verify extra thoroughly. Ask detailed questions to gauge legitimacy.',
+        'evasive': '<strong>Evasive = Deceptive:</strong> Legitimate businesses answer questions directly. Evasive tactics: 1) Answering different question than asked, 2) Providing vague non-answers, 3) Deflecting with pressure ("We need to decide now!"), 4) Getting defensive or hostile when questioned. Test: Ask specific questions requiring concrete answers (registration number, physical address, industry certifications). If they dodge, walk away.',
+        'pressuring': '<strong>High-Pressure Tactics Exposed:</strong> Psychological manipulation techniques scammers use: 1) Artificial scarcity ("Only 2 left!"), 2) Time pressure ("Offer ends in 1 hour!"), 3) Social pressure ("Everyone\'s buying!"), 4) Threatening losses ("You\'ll miss out!"), 5) Anger/intimidation. Legitimate Malaysian businesses respect your decision-making time. If you feel pressured, it\'s designed to bypass your rational thinking - STOP.',
+        'normal': '<strong>Professional Communication Standard:</strong> Good business communication: Clear and timely responses, addresses your concerns directly, maintains professional tone, provides requested information willingly, respects boundaries, gives you space to decide. Even during negotiations, professionalism remains. This should be your baseline expectation.',
+        'excellent': '<strong>Transparent Communication:</strong> Best practices: Proactively provides information, anticipates your concerns, offers additional resources, explains processes clearly, maintains consistent messaging, admits limitations honestly, provides multiple contact methods. Transparency indicates confidence and legitimacy - nothing to hide.'
+      },
+      meeting: {
+        'refuses': '<strong>Refusal to Meet = Red Alert:</strong> Why scammers refuse meetings: 1) Not in Malaysia (overseas operation), 2) Hiding identity (wanted by police), 3) Using stolen photos/fake persona, 4) Plan to disappear after scamming. For local transactions, insisting on meeting in-person is your right. For online sellers: video call minimum. Any excuse is suspicious - "too busy", "camera broken", "privacy concerns". Don\'t proceed.',
+        'text-only': '<strong>Text-Only Limitation:</strong> Why text-only is risky: 1) Can\'t verify voice/video = can\'t confirm identity, 2) Easy to copy/paste scripted scam responses, 3) Can be multiple people using same account, 4) WhatsApp account hijacking is common in Malaysia. For significant transactions, minimum requirement: Voice call, ideally video. Save all text conversations as evidence.',
+        'phone-only': '<strong>Phone-Only Concerns:</strong> Phone calls are better than text but risks remain: 1) Caller ID spoofing (displaying fake numbers), 2) Voice changers can deceive, 3) Can\'t verify visual identity, 4) No paper trail (record calls if legal in your area). In Malaysia, scammers spoof bank/police numbers. Solution: Never call numbers they provide - look up official numbers yourself and call those. Request video call for high-value deals.',
+        'video-willing': '<strong>Video Call Verification:</strong> Video call best practices: 1) Request ID verification on camera (MyKad), 2) Ask them to show physical office/location, 3) Record the call (with permission), 4) Ask unexpected questions to verify authenticity, 5) Check if background matches claimed location. Watch for: Pre-recorded video, poor connection excuses to avoid video, generic backgrounds. Video greatly reduces scam risk.',
+        'in-person': '<strong>Safe In-Person Meetings:</strong> Meeting safely in Malaysia: ✓ Public places (mall, bank, coffee shop), ✓ Daytime meetings, ✓ Bring someone with you, ✓ Police station for high-value items, ✓ Inspect items thoroughly, ✓ Count cash carefully, ✓ Get receipts/documentation. ✗ DON\'T: Meet at private homes (theirs or yours), secluded areas, late night, alone for expensive items. Trust your instincts.'
+      },
+      references: {
+        'refuses': '<strong>Reference Refusal Warning:</strong> When someone refuses references or gets defensive, it means: 1) No previous satisfied customers, 2) Hiding poor track record, 3) Likely scam with zero legitimate transactions. In Malaysia, even small businesses have Facebook pages with reviews. Ask yourself: If their service is good, why hide references? This should end the conversation immediately.',
+        'fake': '<strong>Spotting Fake References:</strong> Red flags for fake references: 1) All reviews 5-stars with generic praise, 2) Reviews posted on same dates, 3) Reviewer profiles created recently, 4) Similar writing styles, 5) No negative reviews ever, 6) References only reachable through seller. Verify: Google reviewer names, call references yourself (not numbers provided by seller), check multiple review platforms, look for detailed specific feedback.',
+        'limited': '<strong>Limited References Verification:</strong> New businesses have few references - verify them thoroughly: 1) Contact each reference personally, 2) Ask specific questions about their experience, 3) Verify references are real people (LinkedIn, Facebook), 4) Ask to see proof of completed projects/sales, 5) Start with smaller transaction to test, 6) Check if owner has history in industry even if company is new.',
+        'provides': '<strong>Verify Provided References:</strong> Don\'t just accept references at face value. Verification steps: 1) Contact through independent channels (find their contact info yourself), 2) Ask detailed questions (timeline, problems encountered, resolution), 3) Verify their identity (LinkedIn profiles, company websites), 4) Check recent reviews on Google/Facebook, 5) Look for complaints on Lowyat Forum or Malaysia consumer sites, 6) Ask if they would use the service again.',
+        'extensive': '<strong>Extensive Track Record Value:</strong> Long history provides: Better accountability (reputation to protect), Verifiable performance pattern, More data points for assessment, Established processes and professionalism. Still verify: Are reviews recent or all old? Any changes in management? Google company name + "scam" or "complaint". Check SSM for company age. Even established companies can have rogue employees.'
+      },
+      unusualRequests: {
+        'lie-to-others': '<strong>CRITICAL - Lying Request = SCAM:</strong> If they ask you to lie to ANYONE (bank, employer, family, authorities), this is 100% a scam and likely criminal activity. Common scenarios in Malaysia: "Tell your bank this transfer is for business", "Don\'t tell your family about this investment", "Say you\'re paying for services if asked". This is money laundering or fraud. STOP ALL COMMUNICATION. Report to Bank Negara Malaysia and Royal Malaysia Police cyber crime division immediately.',
+        'secrecy': '<strong>Secrecy Demands Exposed:</strong> Scammers demand secrecy to: 1) Isolate you from advice, 2) Prevent verification by others, 3) Avoid detection, 4) Control narrative. Common excuses: "Exclusive deal", "Confidentiality agreement", "Don\'t want competition to know". Legitimate business reasons exist (M&A, patents) BUT these involve lawyers and formal NDAs from established firms. For regular transactions, secrecy is red flag. Always discuss major transactions with trusted advisors.',
+        'personal-info': '<strong>Excessive Info Requests:</strong> Identity theft is rampant in Malaysia. NEVER share: 1) IC front/back photos, 2) Bank account passwords/PINs, 3) OTP codes, 4) Credit card CVV, 5) Social Security/EPF details, 6) MyKad chip data. Legitimate businesses need: Name, contact info, delivery address, possibly IC number (for contracts). Banks/Government NEVER ask for passwords or OTP. If website requests unusual info, close it immediately.',
+        'minor-concerns': '<strong>Trust Your Gut Feeling:</strong> Your subconscious detects red flags before your conscious mind. If something feels "off" but you can\'t pinpoint why, investigate further. Common "minor" concerns that ARE significant: Slightly odd wording, small inconsistencies, mild pressure, unusual payment timing, slightly vague answers. Don\'t dismiss intuition - it\'s your brain protecting you. Ask more questions, verify details, or walk away.',
+        'none': '<strong>No Red Flags - Still Be Cautious:</strong> Even when everything seems legitimate: 1) Use secure payment methods (not gift cards/crypto), 2) Keep all documentation, 3) Don\'t share unnecessary info, 4) Verify key facts independently, 5) Get everything in writing, 6) Know your legal rights. Scammers can be sophisticated. The best protection is following standard security practices for ALL transactions, regardless of how legitimate they appear.'
+      },
+      representative: {
+        'direct-owner': '<strong>Dealing with Business Owner:</strong> Best accountability scenario. Verify ownership: 1) Check SSM (Companies Commission of Malaysia) - search company name, confirm director matches, 2) Request business card, 3) Video call to verify face matches IC, 4) Check LinkedIn profile history, 5) Visit physical business location if local. Owner has most to lose from bad reputation, so generally more trustworthy. Still get contracts and documentation.',
+        'authorized-rep': '<strong>Verifying Representatives:</strong> Representatives are normal for medium/large companies. Verification: 1) Request authorization letter on company letterhead, 2) Call company directly (look up number yourself) to confirm person works there, 3) Check employee LinkedIn/company website directory, 4) Get direct supervisor contact, 5) Meet at company office, 6) Authorization letter should specify scope of authority. Be wary if they resist verification.',
+        'unclear-rep': '<strong>Unclear Representation = STOP:</strong> You MUST know who has authority to transact. Demand clarity: Who do you work for? (Get company details), What\'s your role? (Get title, responsibilities), Who\'s your superior? (Get contact to verify), Show authorization documentation. If they\'re vague or change answers, assume scam. In Malaysia, legitimate businesses clearly identify representatives. Unclear = Hiding something = Don\'t transact.',
+        'multiple-people': '<strong>Multiple Contacts Red Flag:</strong> Many people involved without clear roles suggests: 1) Scam network (different people play different roles), 2) Disorganized illegitimate operation, 3) Attempting to confuse you. Legitimate scenario: Sales person, technical specialist, finance department. Ask for: Organization chart, each person\'s role/title, why multiple people needed, supervisor contact. If still unclear or they avoid answering, high scam risk.',
+        'keeps-changing': '<strong>Changing Contacts = SCAM INDICATOR:</strong> Constantly changing who you talk to means: 1) No consistent point person = disorganized scam, 2) Previous person disappeared = scam pattern, 3) Avoiding accountability, 4) Confusing you intentionally. Legitimate reasons (employee left) should be: Explained clearly, New contact introduced properly, Continuity maintained, Previous agreements honored. If contacts keep vanishing without explanation, STOP - likely scam network operation.'
+      }
+    };
+
+    // Handle button selections
+    document.addEventListener('DOMContentLoaded', () => {
+      const allOptionButtons = document.querySelectorAll('.option-btn, .option-btn-full');
+      
+      allOptionButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          const field = this.getAttribute('data-field');
+          const value = this.getAttribute('data-value');
+          
+          // Remove selected class from all buttons in this field
+          document.querySelectorAll(`[data-field="${field}"]`).forEach(btn => {
+            btn.classList.remove('selected');
+          });
+          
+          // Add selected class to clicked button
+          this.classList.add('selected');
+          
+          // Update hidden input value
+          const hiddenInput = document.querySelector(`input[name="${field}"]`);
+          if (hiddenInput) {
+            hiddenInput.value = value;
+          }
+
+          // Show educational info box if content exists
+          if (educationalContent[field] && educationalContent[field][value]) {
+            const infoBox = document.getElementById(`info-${field}`);
+            const infoContent = document.getElementById(`info-content-${field}`);
+            
+            if (infoBox && infoContent) {
+              infoContent.innerHTML = educationalContent[field][value];
+              infoBox.classList.remove('hidden');
+              
+              // Smooth scroll to show the info box
+              setTimeout(() => {
+                infoBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              }, 100);
+            }
+          }
+        });
+      });
+    });
+
+    // Risk scoring system
+    const riskScores = {
+      paymentMethod: {
+        'gift-cards': 30,
+        'cryptocurrency': 25,
+        'wire-transfer': 18,
+        'money-order': 18,
+        'bank-transfer': 8,
+        'check': 5,
+        'cod': 3,
+        'escrow': 0,
+        'credit-card': 0
+      },
+      timeline: {
+        'immediate': 20,
+        'same-day': 15,
+        'few-days': 6,
+        'week': 2,
+        'flexible': 0
+      },
+      contactMethod: {
+        'unsolicited-email': 12,
+        'unsolicited-call': 12,
+        'sms': 15,
+        'social-media': 8,
+        'business-platform': 3,
+        'referral': 0,
+        'company-website': 0
+      },
+      emailDomain: {
+        'no-email': 20,
+        'suspicious': 30,
+        'free-email': 12,
+        'new-domain': 15,
+        'company-domain': 0
+      },
+      dealQuality: {
+        'too-good': 25,
+        'better': 5,
+        'market-rate': 0,
+        'slightly-worse': 3
+      },
+      documentation: {
+        'refuses': 25,
+        'vague': 12,
+        'willing': 2,
+        'professional': 0
+      },
+      verification: {
+        'no-info': 25,
+        'inconsistent': 22,
+        'minimal': 10,
+        'verified': 0,
+        'established': -5
+      },
+      communication: {
+        'poor': 18,
+        'evasive': 20,
+        'pressuring': 20,
+        'normal': 2,
+        'excellent': 0
+      },
+      meeting: {
+        'refuses': 20,
+        'text-only': 15,
+        'phone-only': 8,
+        'video-willing': 0,
+        'in-person': -5
+      },
+      references: {
+        'refuses': 20,
+        'fake': 30,
+        'limited': 8,
+        'provides': 0,
+        'extensive': -5
+      },
+      unusualRequests: {
+        'lie-to-others': 35,
+        'secrecy': 25,
+        'personal-info': 20,
+        'minor-concerns': 10,
+        'none': 0
+      },
+      representative: {
+        'keeps-changing': 25,
+        'multiple-people': 18,
+        'unclear-rep': 15,
+        'authorized-rep': 3,
+        'direct-owner': 0
+      }
+    };
+
+    document.getElementById('scamCheckerForm')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(e.target as HTMLFormElement);
+      let totalScore = 0;
+      const redFlags: string[] = [];
+      
+      // Calculate total risk score
+      for (const [category, value] of formData.entries()) {
+        const score = riskScores[category as keyof typeof riskScores]?.[value as string] || 0;
+        totalScore += score;
+        
+        // Track red flags (items with score >= 15)
+        if (score >= 15) {
+          redFlags.push(getRedFlagMessage(category, value as string));
+        }
+      }
+      
+      // Show results
+      displayResults(totalScore, redFlags);
+      
+      // Scroll to results
+      document.getElementById('results')?.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    function getRedFlagMessage(category: string, value: string): string {
+      const messages: Record<string, Record<string, string>> = {
+        paymentMethod: {
+          'gift-cards': 'Payment via gift cards is a major scam indicator - nearly always fraudulent',
+          'cryptocurrency': 'Cryptocurrency payments are often used in scams due to irreversibility',
+          'wire-transfer': 'Wire transfers are risky as they are difficult to reverse',
+          'money-order': 'Money orders can be fraudulent and hard to trace'
+        },
+        timeline: {
+          'immediate': 'Extreme urgency is a classic scam tactic to prevent due diligence',
+          'same-day': 'Same-day pressure may indicate a scam attempting to rush your decision'
+        },
+        contactMethod: {
+          'unsolicited-email': 'Unsolicited contact is a common scam approach',
+          'unsolicited-call': 'Unsolicited phone calls are often used in scam operations',
+          'sms': 'SMS-based business proposals are highly unusual and suspicious'
+        },
+        emailDomain: {
+          'no-email': 'Legitimate businesses always have email communication',
+          'suspicious': 'Suspicious or misspelled domains are major red flags',
+          'free-email': 'Professional businesses typically use company domains, not free email services',
+          'new-domain': 'Very new domains are often created for scam operations'
+        },
+        dealQuality: {
+          'too-good': 'If a deal seems too good to be true, it probably is'
+        },
+        documentation: {
+          'refuses': 'Refusal to provide documentation is a critical warning sign',
+          'vague': 'Unprofessional documentation suggests illegitimate operation'
+        },
+        verification: {
+          'no-info': 'Inability to verify identity is extremely concerning',
+          'inconsistent': 'Inconsistent information is a hallmark of fraudulent operations'
+        },
+        communication: {
+          'poor': 'Poor communication quality often indicates scam operations',
+          'evasive': 'Evasive responses suggest something to hide',
+          'pressuring': 'Aggressive pressure tactics are classic scam behavior'
+        },
+        meeting: {
+          'refuses': 'Refusal to meet in person or via video is highly suspicious',
+          'text-only': 'Insistence on text-only communication is a warning sign'
+        },
+        references: {
+          'refuses': 'Refusal to provide references is concerning',
+          'fake': 'Fake references are a clear indication of fraud'
+        },
+        unusualRequests: {
+          'lie-to-others': 'CRITICAL: Asking you to lie is a major scam indicator - this is fraud',
+          'secrecy': 'Demanding unusual secrecy about business dealings is a serious red flag',
+          'personal-info': 'Excessive personal information requests may indicate identity theft attempt'
+        },
+        representative: {
+          'keeps-changing': 'Constantly changing representatives suggests disorganized or fraudulent operation',
+          'multiple-people': 'Multiple unclear contacts can indicate a scam network',
+          'unclear-rep': 'Unclear representation raises questions about legitimacy'
+        }
+      };
+      
+      return messages[category]?.[value] || 'This factor raises concerns about legitimacy';
+    }
+
+    function displayResults(score: number, redFlags: string[]) {
+      const resultsDiv = document.getElementById('results');
+      const resultCard = document.getElementById('resultCard');
+      const riskBadge = document.getElementById('riskBadge');
+      const riskScore = document.getElementById('riskScore');
+      const summaryText = document.getElementById('summaryText');
+      const redFlagsList = document.getElementById('redFlagsList');
+      const recommendationsList = document.getElementById('recommendationsList');
+      
+      if (!resultsDiv || !resultCard || !riskBadge || !riskScore || !summaryText || !redFlagsList || !recommendationsList) return;
+      
+      resultsDiv.classList.remove('hidden');
+      
+      let riskLevel: string;
+      let riskColor: string;
+      let borderColor: string;
+      let summary: string;
+      let recommendations: string[];
+      
+      if (score >= 90) {
+        riskLevel = '🚨 CRITICAL RISK';
+        riskColor = 'bg-red-600 text-white';
+        borderColor = 'border-red-500';
+        summary = 'This transaction shows MULTIPLE SEVERE red flags indicating a highly likely scam. We strongly recommend NOT proceeding with this transaction.';
+        recommendations = [
+          'DO NOT proceed with this transaction',
+          'Report this to relevant authorities (police, consumer protection)',
+          'Block all communication with this party',
+          'If you\'ve already paid, contact your bank/payment provider immediately',
+          'Document all communications for potential legal action'
+        ];
+      } else if (score >= 60) {
+        riskLevel = '⚠️ HIGH RISK';
+        riskColor = 'bg-orange-600 text-white';
+        borderColor = 'border-orange-500';
+        summary = 'This transaction has significant red flags that suggest it may be a scam. Exercise extreme caution and conduct thorough verification before proceeding.';
+        recommendations = [
+          'Conduct extensive background checks on the party',
+          'Verify identity through multiple independent sources',
+          'Request formal contracts reviewed by a lawyer',
+          'Use secure payment methods with buyer protection',
+          'Consider walking away if any concerns remain',
+          'Consult with a professional before proceeding'
+        ];
+      } else if (score >= 30) {
+        riskLevel = '⚡ MODERATE RISK';
+        riskColor = 'bg-yellow-600 text-white';
+        borderColor = 'border-yellow-500';
+        summary = 'This transaction shows some concerning indicators. While it may be legitimate, additional verification is recommended before proceeding.';
+        recommendations = [
+          'Verify the business through official registries',
+          'Request and review formal documentation',
+          'Check for online reviews and reputation',
+          'Use secure payment methods with recourse options',
+          'Meet in person or via video call before committing',
+          'Trust your instincts - if something feels off, investigate further'
+        ];
+      } else if (score >= 10) {
+        riskLevel = '✅ LOW RISK';
+        riskColor = 'bg-green-600 text-white';
+        borderColor = 'border-green-500';
+        summary = 'This transaction appears to have few red flags, suggesting it may be legitimate. However, always maintain standard business caution and due diligence.';
+        recommendations = [
+          'Continue with normal business due diligence',
+          'Keep documentation of all communications',
+          'Use standard contracts and agreements',
+          'Maintain professional payment methods',
+          'Stay alert for any changes in behavior or requests',
+          'When in doubt, seek professional advice'
+        ];
+      } else {
+        riskLevel = '🌟 VERY LOW RISK';
+        riskColor = 'bg-blue-600 text-white';
+        borderColor = 'border-blue-500';
+        summary = 'This transaction shows positive indicators and appears trustworthy. The other party demonstrates professional behavior and transparency. Still, maintain standard business practices.';
+        recommendations = [
+          'Proceed with confidence but maintain professionalism',
+          'Keep standard documentation and records',
+          'Use agreed-upon payment methods and timelines',
+          'Maintain clear communication throughout the process',
+          'Honor all contractual obligations',
+          'Build a positive business relationship'
+        ];
+      }
+      
+      riskBadge.textContent = riskLevel;
+      riskBadge.className = `inline-block px-6 py-3 rounded-full text-2xl font-bold mb-4 ${riskColor}`;
+      resultCard.className = `border rounded-xl p-8 ${borderColor}`;
+      riskScore.textContent = `Risk Score: ${score} out of 270`;
+      summaryText.textContent = summary;
+      
+      // Display red flags
+      if (redFlags.length > 0) {
+        redFlagsList.innerHTML = redFlags.map(flag => 
+          `<li class="flex items-start text-gray-300">
+            <svg class="w-5 h-5 text-red-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+            ${flag}
+          </li>`
+        ).join('');
+      } else {
+        document.getElementById('redFlags')!.innerHTML = 
+          `<h3 class="text-xl font-semibold text-white mb-3 flex items-center">
+            <svg class="w-6 h-6 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            No Major Red Flags
+          </h3>
+          <p class="text-gray-300">No critical warning signs detected, but always maintain due diligence.</p>`;
+      }
+      
+      // Display recommendations
+      recommendationsList.innerHTML = recommendations.map(rec => 
+        `<li class="flex items-start text-gray-300">
+          <svg class="w-5 h-5 text-indigo-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+          ${rec}
+        </li>`
+      ).join('');
+    }
+  </script>
+</MainLayout>

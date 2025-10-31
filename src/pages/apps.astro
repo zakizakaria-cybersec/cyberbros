@@ -1,0 +1,159 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout 
+  title="Free Security Tools - CyberBros" 
+  description="Free cybersecurity tools and apps to help protect your business from scams and fraud"
+>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-gray-900 via-black to-gray-900 py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+          Free Security <span class="text-indigo-400">Tools & Apps</span>
+        </h1>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+          Empowering businesses with free, practical tools to protect themselves from scams, fraud, and security threats. 
+          Our mission is to make cybersecurity accessible to everyone.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools Grid -->
+  <section class="py-16 bg-black">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Scam Checker Tool -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-8 hover:border-indigo-500 transition-all duration-300 group">
+          <div class="mb-6">
+            <div class="w-16 h-16 bg-indigo-600/20 rounded-xl flex items-center justify-center group-hover:bg-indigo-600/30 transition-colors">
+              <svg class="w-8 h-8 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">Business Exchange Scam Checker</h3>
+          <p class="text-gray-400 mb-6">
+            Evaluate potential business transactions for red flags and scam indicators. Get instant risk assessment 
+            based on payment methods, communication patterns, and more.
+          </p>
+          <ul class="space-y-2 mb-6">
+            <li class="flex items-center text-gray-300">
+              <svg class="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              Payment method analysis
+            </li>
+            <li class="flex items-center text-gray-300">
+              <svg class="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              Timeline evaluation
+            </li>
+            <li class="flex items-center text-gray-300">
+              <svg class="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              Communication red flags
+            </li>
+          </ul>
+          <a 
+            href="/apps/scam-checker" 
+            class="inline-flex items-center justify-center w-full bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-500 transition-colors font-semibold"
+          >
+            Use Tool
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Placeholder for Future Tools -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-8 opacity-60">
+          <div class="mb-6">
+            <div class="w-16 h-16 bg-gray-700/20 rounded-xl flex items-center justify-center">
+              <svg class="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-400 mb-3">Password Strength Checker</h3>
+          <p class="text-gray-500 mb-6">
+            Analyze your password strength and get recommendations for creating more secure passwords.
+          </p>
+          <div class="inline-flex items-center justify-center w-full bg-gray-700 text-gray-400 px-6 py-3 rounded-lg font-semibold cursor-not-allowed">
+            Coming Soon
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-8 opacity-60">
+          <div class="mb-6">
+            <div class="w-16 h-16 bg-gray-700/20 rounded-xl flex items-center justify-center">
+              <svg class="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-400 mb-3">Phishing Email Detector</h3>
+          <p class="text-gray-500 mb-6">
+            Paste suspicious email content to check for common phishing indicators and malicious patterns.
+          </p>
+          <div class="inline-flex items-center justify-center w-full bg-gray-700 text-gray-400 px-6 py-3 rounded-lg font-semibold cursor-not-allowed">
+            Coming Soon
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Free Tools Section -->
+  <section class="py-16 bg-gradient-to-br from-gray-900 via-black to-gray-900">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+        Why We Offer Free Tools
+      </h2>
+      <p class="text-lg text-gray-300 mb-8">
+        At CyberBros, we believe cybersecurity should be accessible to everyone. These free tools are part of 
+        our commitment to helping businesses protect themselves, regardless of their size or budget. 
+        By empowering you with knowledge and practical tools, we contribute to a safer digital ecosystem for all.
+      </p>
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div>
+          <div class="text-indigo-400 text-4xl font-bold mb-2">100%</div>
+          <div class="text-gray-300">Free Forever</div>
+        </div>
+        <div>
+          <div class="text-indigo-400 text-4xl font-bold mb-2">0</div>
+          <div class="text-gray-300">Data Collection</div>
+        </div>
+        <div>
+          <div class="text-indigo-400 text-4xl font-bold mb-2">24/7</div>
+          <div class="text-gray-300">Available</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-black border-t border-gray-800">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold text-white mb-4">
+        Need Professional Cybersecurity Services?
+      </h2>
+      <p class="text-lg text-gray-300 mb-8">
+        While our free tools provide basic protection, comprehensive security requires professional expertise. 
+        Let us help secure your business with our full range of cybersecurity services.
+      </p>
+      <a 
+        href="/#contact" 
+        class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg hover:bg-indigo-500 transition-colors font-semibold"
+      >
+        Get in Touch
+      </a>
+    </div>
+  </section>
+</MainLayout>
