@@ -1,6 +1,14 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import Navigation from '../../components/Navigation.astro';
+import {
+  SocialShare,
+  WhatsAppShareButton,
+  FacebookShareButton,
+  LinkedInShareButton,
+  EmailShareButton,
+  TwitterShareButton
+} from 'astro-social-share';
 ---
 
 <MainLayout 
@@ -30,17 +38,31 @@ import Navigation from '../../components/Navigation.astro';
       </div>
 
       <!-- Disclaimer -->
-      <div class="bg-yellow-900/20 border border-yellow-700/50 rounded-lg p-4 mb-8">
-        <div class="flex items-start">
-          <svg class="w-6 h-6 text-yellow-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div id="disclaimerBanner" class="bg-yellow-900/20 border border-yellow-700/50 rounded-lg p-4 mb-8">
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-yellow-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
           </svg>
-          <div>
-            <h3 class="text-yellow-400 font-semibold mb-1">Disclaimer</h3>
-            <p class="text-gray-300 text-sm">
-              This tool provides general guidance only and should not be considered as professional advice. 
-              Always conduct thorough due diligence and consult with professionals for significant business transactions.
-            </p>
+          <div class="flex-1">
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+              <div>
+                <h3 class="text-yellow-400 font-semibold mb-1">Disclaimer</h3>
+                <p class="text-gray-300 text-sm">
+                  This tool provides general guidance only and should not be considered as professional advice. 
+                  Always conduct thorough due diligence and consult with professionals for significant business transactions.
+                </p>
+              </div>
+              <button 
+                type="button"
+                id="dismissDisclaimer"
+                class="inline-flex items-center justify-center bg-yellow-700/30 hover:bg-yellow-700/40 text-yellow-200 w-8 h-8 rounded-full transition"
+                aria-label="Close disclaimer"
+              >
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -48,7 +70,7 @@ import Navigation from '../../components/Navigation.astro';
       <!-- Progress Bar -->
       <div class="mb-8">
         <div class="flex justify-between items-center mb-2">
-          <span class="text-sm text-gray-400">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">7</span></span>
+          <span class="text-sm text-gray-400">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">8</span></span>
           <span class="text-sm text-indigo-400"><span id="progressPercent">0</span>% Complete</span>
         </div>
         <div class="w-full bg-gray-800 rounded-full h-2">
@@ -227,10 +249,62 @@ import Navigation from '../../components/Navigation.astro';
           </div>
         </div>
 
-        <!-- Q4: Communication Medium -->
+        <!-- Q4: Who is Coming to Meet -->
         <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="4">
           <label class="block text-white font-semibold mb-4 text-lg">
             <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">4</span>
+            Who is Coming to Meet / Conduct Transaction?
+            <span class="text-red-400 ml-1">*</span>
+          </label>
+          <p class="text-gray-400 text-sm mb-4">If this is an in-person or video meeting, who will be present from their side?</p>
+          <div class="flex flex-col gap-3">
+            <button type="button" class="option-btn-full has-tooltip" data-field="whoMeeting" data-value="person-directly">
+              <span class="text-xl mr-2">👤</span> The Person I've Been Communicating With
+              <span class="tooltip">✓ Best scenario - direct accountability. Verify their identity matches communications.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="whoMeeting" data-value="authorized-representative">
+              <span class="text-xl mr-2">💼</span> Authorized Representative / Employee
+              <span class="tooltip">✓ Normal for businesses. Request authorization letter and verify with company directly.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="whoMeeting" data-value="sending-someone-else">
+              <span class="text-xl mr-2">🚩</span> Sending Someone Else (Friend/Family)
+              <span class="tooltip">🚨 MAJOR RED FLAG! Why can't they come personally? Scammers avoid face-to-face to hide identity. Common excuse: "I'm busy, my friend will deliver." This is often a robbery setup or scam handoff.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="whoMeeting" data-value="courier-delivery">
+              <span class="text-xl mr-2">📦</span> Courier / Delivery Service
+              <span class="tooltip">✓ Normal for e-commerce. Use reputable courier services. Inspect goods before signing. Be wary of COD scams with fake/damaged items.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="whoMeeting" data-value="unclear-evasive">
+              <span class="text-xl mr-2">❓</span> Unclear / Being Evasive About Who
+              <span class="tooltip">🚨 CRITICAL WARNING! Refusing to specify who will meet is extremely suspicious. Legitimate parties are transparent about representation.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="whoMeeting" data-value="online-no-meeting">
+              <span class="text-xl mr-2">🌐</span> No In-Person Meeting (Online Only)
+              <span class="tooltip">ℹ️ Common for online transactions. Use secure platforms with buyer protection. Request video call for high-value items.</span>
+            </button>
+            <button type="button" class="option-btn-full has-tooltip" data-field="whoMeeting" data-value="not-applicable">
+              <span class="text-xl mr-2">➖</span> Not Applicable / Haven't Discussed Yet
+              <span class="tooltip">ℹ️ If you haven't reached this stage yet, select this option.</span>
+            </button>
+          </div>
+          <input type="hidden" name="whoMeeting" required />
+          
+          <div id="info-whoMeeting" class="info-box hidden mt-4 bg-indigo-900/20 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+            <div class="flex items-start">
+              <svg class="w-6 h-6 text-indigo-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <div class="flex-1">
+                <div id="info-content-whoMeeting" class="text-gray-300 text-sm leading-relaxed"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q5: Communication Medium -->
+        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="5">
+          <label class="block text-white font-semibold mb-4 text-lg">
+            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">5</span>
             Communication Medium
             <span class="text-red-400 ml-1">*</span>
           </label>
@@ -290,10 +364,10 @@ import Navigation from '../../components/Navigation.astro';
           </div>
         </div>
 
-        <!-- Q5: Unusual Requests/Behavior -->
-        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="5">
+        <!-- Q6: Unusual Requests/Behavior -->
+        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="6">
           <label class="block text-white font-semibold mb-4 text-lg">
-            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">5</span>
+            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">6</span>
             Unusual Requests or Behavior
             <span class="text-red-400 ml-1">*</span>
           </label>
@@ -345,49 +419,50 @@ import Navigation from '../../components/Navigation.astro';
           </div>
         </div>
 
-        <!-- Q6: Social Engineering Tactics -->
-        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="6">
+        <!-- Q7: Pressure Tactics & Manipulation -->
+        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="7">
           <label class="block text-white font-semibold mb-4 text-lg">
-            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">6</span>
-            Social Engineering Tactics Used
+            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">7</span>
+            Pressure Tactics & Manipulation
             <span class="text-red-400 ml-1">*</span>
           </label>
+          <p class="text-gray-400 text-sm mb-4">Are they using any of these tactics to rush or pressure you?</p>
           <div class="flex flex-col gap-3">
             <button type="button" class="option-btn-full has-tooltip" data-field="socialEngineering" data-value="urgency">
-              <span class="text-xl mr-2">⚡</span> Urgency ("Act now or miss out!")
-              <span class="tooltip">🚨 Classic pressure tactic! Scammers create fake urgency to prevent rational thinking and research.</span>
+              <span class="text-xl mr-2">⚡</span> Rushing You ("Act now or miss out!")
+              <span class="tooltip">🚨 Creating fake urgency to stop you from thinking clearly or checking if it's real.</span>
             </button>
             <button type="button" class="option-btn-full has-tooltip" data-field="socialEngineering" data-value="fear">
-              <span class="text-xl mr-2">😨</span> Fear ("Police will arrest you!")
-              <span class="tooltip">🚨 Intimidation tactic! Used in Macau Scams. Authorities never threaten over phone/message.</span>
+              <span class="text-xl mr-2">😨</span> Threatening You ("Police will arrest you!")
+              <span class="tooltip">🚨 Using fear and threats. Real authorities NEVER threaten over phone or messages.</span>
             </button>
             <button type="button" class="option-btn-full has-tooltip" data-field="socialEngineering" data-value="scarcity">
-              <span class="text-xl mr-2">🔥</span> Scarcity ("Only 2 left!")
-              <span class="tooltip">⚠️ Creates artificial pressure. Legitimate businesses don't manipulate with fake scarcity.</span>
+              <span class="text-xl mr-2">🔥</span> "Limited Stock" Claims ("Only 2 left!")
+              <span class="tooltip">⚠️ Making you feel like you'll miss out. Often fake to rush your decision.</span>
             </button>
             <button type="button" class="option-btn-full has-tooltip" data-field="socialEngineering" data-value="authority">
-              <span class="text-xl mr-2">👮</span> Authority (Impersonating Officials)
-              <span class="tooltip">🚨 Common in Malaysia! Scammers impersonate police, banks, government. Always verify independently.</span>
+              <span class="text-xl mr-2">👮</span> Pretending to be Someone Important
+              <span class="tooltip">🚨 Impersonating police, banks, or government officials. Always verify directly through official channels.</span>
             </button>
             <button type="button" class="option-btn-full has-tooltip" data-field="socialEngineering" data-value="too-good">
-              <span class="text-xl mr-2">💰</span> Too Good to Be True Offers
-              <span class="tooltip">🚨 If it seems too good to be true, it is! Unrealistic returns, prices, or opportunities are bait.</span>
+              <span class="text-xl mr-2">💰</span> Unbelievable Deals or Returns
+              <span class="tooltip">🚨 If it sounds too good to be true, it is! Extremely high profits or impossibly low prices are bait.</span>
             </button>
             <button type="button" class="option-btn-full has-tooltip" data-field="socialEngineering" data-value="social-proof">
-              <span class="text-xl mr-2">👥</span> Fake Social Proof (Group Success)
-              <span class="tooltip">🚨 WhatsApp groups showing fake profits. All "members" are scammer accounts. Don't fall for it!</span>
+              <span class="text-xl mr-2">👥</span> Showing "Others Making Money"
+              <span class="tooltip">🚨 Groups showing fake success stories and profits. All those "members" are controlled by scammers.</span>
             </button>
             <button type="button" class="option-btn-full has-tooltip" data-field="socialEngineering" data-value="reciprocity">
-              <span class="text-xl mr-2">🎁</span> Reciprocity (Small gift/payment first)
-              <span class="tooltip">⚠️ They give you small amount first to build trust, then ask for larger payment. The bait tactic!</span>
+              <span class="text-xl mr-2">🎁</span> Small Payment First to "Prove" It's Real
+              <span class="tooltip">⚠️ Giving small amount to gain trust, then asking for much larger payment. Classic bait trick!</span>
             </button>
             <button type="button" class="option-btn-full has-tooltip" data-field="socialEngineering" data-value="sympathy">
-              <span class="text-xl mr-2">💔</span> Sympathy/Sob Story
-              <span class="tooltip">⚠️ Emotional manipulation. Romance scams, fake emergencies. Business shouldn't involve emotional appeals.</span>
+              <span class="text-xl mr-2">💔</span> Sad Stories to Make You Feel Sorry
+              <span class="tooltip">⚠️ Using emotions (love, pity, guilt) to manipulate you. Real business is professional, not emotional.</span>
             </button>
             <button type="button" class="option-btn-full has-tooltip" data-field="socialEngineering" data-value="none">
-              <span class="text-xl mr-2">✅</span> No Pressure Tactics
-              <span class="tooltip">✓ Good sign! Professional, respectful approach without manipulation. Legitimate businesses operate this way.</span>
+              <span class="text-xl mr-2">✅</span> No Pressure or Manipulation
+              <span class="tooltip">✓ Good sign! They're being professional and giving you time to decide. This is how real businesses work.</span>
             </button>
           </div>
           <input type="hidden" name="socialEngineering" required />
@@ -404,10 +479,10 @@ import Navigation from '../../components/Navigation.astro';
           </div>
         </div>
 
-        <!-- Q7: Information About Other Party -->
-        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="7">
+        <!-- Q8: Information About Other Party -->
+        <div class="question-card bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all" data-question="8">
           <label class="block text-white font-semibold mb-4 text-lg">
-            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">7</span>
+            <span class="inline-flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full text-sm mr-3">8</span>
             Information You Have About the Other Party
             <span class="text-gray-400 text-sm font-normal ml-2">(Select all that apply)</span>
             <span class="text-red-400 ml-1">*</span>
@@ -546,47 +621,212 @@ import Navigation from '../../components/Navigation.astro';
       </div>
 
       <!-- Results Section (Hidden Initially) -->
-      <div id="results" class="hidden mt-12">
-        <div id="resultCard" class="border rounded-xl p-8">
-          <div class="text-center mb-6">
-            <div id="riskBadge" class="inline-block px-6 py-3 rounded-full text-2xl font-bold mb-4"></div>
-            <h2 class="text-3xl font-bold text-white mb-2">Risk Assessment Results</h2>
-            <p id="riskScore" class="text-xl text-gray-300"></p>
+      <div id="results" class="question-card mt-6" data-question="9">
+        <div id="resultCard">
+          <div class="text-center mb-4">
+            <div id="riskBadge" class="inline-block px-4 py-2 rounded-full text-lg sm:text-xl font-bold mb-3"></div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">Risk Assessment</h2>
+            <p id="riskScore" class="text-sm sm:text-base text-gray-400"></p>
           </div>
           
-          <div id="riskExplanation" class="bg-gray-900 border border-gray-700 rounded-lg p-6 mb-6">
-            <h3 class="text-xl font-semibold text-white mb-3">Assessment Summary</h3>
-            <p id="summaryText" class="text-gray-300"></p>
+          <div id="riskExplanation" class="bg-gray-900/50 border border-gray-700 rounded-lg p-4 mb-4">
+            <h3 class="text-base sm:text-lg font-semibold text-white mb-2 flex items-center">
+              <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+              Summary
+            </h3>
+            <p id="summaryText" class="text-gray-300 text-sm leading-relaxed"></p>
           </div>
 
-          <div id="redFlags" class="bg-gray-900 border border-gray-700 rounded-lg p-6 mb-6">
-            <h3 class="text-xl font-semibold text-white mb-3 flex items-center">
-              <svg class="w-6 h-6 text-red-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div id="redFlags" class="bg-gray-900/50 border border-gray-700 rounded-lg p-4 mb-4">
+            <h3 class="text-base sm:text-lg font-semibold text-white mb-2 flex items-center">
+              <svg class="w-5 h-5 text-red-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
               </svg>
-              Red Flags Detected
+              Red Flags
             </h3>
-            <ul id="redFlagsList" class="space-y-2"></ul>
+            <ul id="redFlagsList" class="space-y-1.5"></ul>
           </div>
 
-          <div id="recommendations" class="bg-gray-900 border border-gray-700 rounded-lg p-6 mb-6">
-            <h3 class="text-xl font-semibold text-white mb-3 flex items-center">
-              <svg class="w-6 h-6 text-indigo-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div id="recommendations" class="bg-gray-900/50 border border-gray-700 rounded-lg p-4 mb-4">
+            <h3 class="text-base sm:text-lg font-semibold text-white mb-2 flex items-center">
+              <svg class="w-5 h-5 text-indigo-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
-              Recommendations
+              What To Do
             </h3>
-            <ul id="recommendationsList" class="space-y-2"></ul>
+            <ul id="recommendationsList" class="space-y-1.5"></ul>
           </div>
 
-          <div class="text-center">
-            <button 
-              onclick="location.reload()"
-              class="bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors font-semibold"
+          <!-- Action Buttons Section -->
+          <div id="actionButtons" class="space-y-3">
+            <!-- Verify Contact Info (shown for all results) -->
+            <div class="bg-indigo-900/20 border border-indigo-700/50 rounded-lg p-4">
+              <h3 class="text-indigo-400 font-semibold text-sm sm:text-base mb-2 flex items-center">
+                <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Verify Information
+              </h3>
+              <p class="text-gray-300 text-xs sm:text-sm mb-3">
+                Check contact info against official Malaysian databases:
+              </p>
+              <div class="space-y-2">
+                <a href="https://ccid.rmp.gov.my/semakmule" target="_blank" rel="noopener noreferrer" 
+                   class="flex items-start text-xs sm:text-sm text-indigo-400 hover:text-indigo-300">
+                  <span class="mr-2">📱</span>
+                  <span class="underline">CCID Scam Check</span>
+                </a>
+                <a href="https://www.bnm.gov.my/financial-consumer-alert-list" target="_blank" rel="noopener noreferrer" 
+                   class="flex items-start text-xs sm:text-sm text-indigo-400 hover:text-indigo-300">
+                  <span class="mr-2">🏦</span>
+                  <span class="underline">Bank Negara Alert List</span>
+                </a>
+                <a href="https://www.sc.com.my/investor-alerts" target="_blank" rel="noopener noreferrer" 
+                   class="flex items-start text-xs sm:text-sm text-indigo-400 hover:text-indigo-300">
+                  <span class="mr-2">📈</span>
+                  <span class="underline">SC Malaysia Investor Alerts</span>
+                </a>
+                <a href="https://www.ssm.com.my/Pages/eSearch.aspx" target="_blank" rel="noopener noreferrer" 
+                   class="flex items-start text-xs sm:text-sm text-indigo-400 hover:text-indigo-300">
+                  <span class="mr-2">🏢</span>
+                  <span class="underline">SSM Business Search</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="space-y-3">
+              <!-- Main Actions -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button 
+                  onclick="location.reload()"
+                  class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-indigo-500 hover:to-purple-500 transition-all font-semibold shadow-lg hover:shadow-indigo-500/50"
+                >
+                  Check Another Transaction
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Share CTA -->
+      <div class="bg-gradient-to-br from-gray-900/80 to-gray-800/80 border border-indigo-900/50 rounded-2xl p-6 mt-8 backdrop-blur-sm">
+        <!-- Header -->
+        <div class="text-center mb-4">
+          <h3 class="text-lg font-bold text-white mb-1">Help Others Stay Safe</h3>
+          <p class="text-sm text-gray-400">Share this tool to protect friends and family from scams</p>
+        </div>
+
+        <!-- Share Buttons -->
+        <div class="flex flex-col items-center gap-3">
+          <!-- Social Media Icons -->
+          <div class="flex items-center gap-3 flex-wrap justify-center">
+            <SocialShare
+              buttons={[WhatsAppShareButton, FacebookShareButton, LinkedInShareButton, EmailShareButton, TwitterShareButton]}
+              title="Universal Scam Checker - CyberBros"
+              description="Check if a transaction is a scam before it's too late! Free scam detection tool for buyers, sellers, and investors."
             >
-              Check Another Transaction
+              <style slot="astro-social-share-css" is:global>
+                .astro-social-share {
+                  display: inline-flex;
+                  gap: 0.75rem;
+                  align-items: center;
+                  flex-wrap: wrap;
+                  justify-content: center;
+                }
+
+                .astro-social-share a.social-share-btn {
+                  display: inline-flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 2.75rem;
+                  height: 2.75rem;
+                  border-radius: 9999px;
+                  background: rgba(75, 85, 99, 0.5);
+                  transition: all 0.2s ease;
+                  border: 1px solid rgba(99, 102, 241, 0.2);
+                }
+
+                .astro-social-share a.social-share-btn:hover {
+                  transform: translateY(-2px);
+                  background: rgba(99, 102, 241, 0.3);
+                  border-color: rgba(99, 102, 241, 0.5);
+                  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+                }
+
+                .astro-social-share a.social-share-btn svg {
+                  height: 1.25rem;
+                  width: 1.25rem;
+                  fill: currentColor;
+                  color: #e5e7eb;
+                }
+
+                @media (max-width: 640px) {
+                  .astro-social-share {
+                    gap: 0.5rem;
+                  }
+
+                  .astro-social-share a.social-share-btn {
+                    width: 2.5rem;
+                    height: 2.5rem;
+                  }
+                  
+                  .astro-social-share a.social-share-btn svg {
+                    height: 1.125rem;
+                    width: 1.125rem;
+                  }
+                }
+
+                /* Copy Link Button - Match social share button styling */
+                .copy-share-btn {
+                  display: inline-flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 2.75rem;
+                  height: 2.75rem;
+                  border-radius: 9999px;
+                  background: rgba(75, 85, 99, 0.5);
+                  transition: all 0.2s ease;
+                  border: 1px solid rgba(99, 102, 241, 0.2);
+                  color: #e5e7eb;
+                  flex-shrink: 0;
+                }
+
+                .copy-share-btn:hover {
+                  transform: translateY(-2px);
+                  background: rgba(99, 102, 241, 0.3);
+                  border-color: rgba(99, 102, 241, 0.5);
+                  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+                }
+
+                @media (max-width: 640px) {
+                  .copy-share-btn {
+                    width: 2.5rem;
+                    height: 2.5rem;
+                  }
+                }
+              </style>
+            </SocialShare>
+            
+            <!-- Copy Link Button -->
+            <button 
+              type="button"
+              id="copyShareLink"
+              class="copy-share-btn"
+              aria-label="Copy link"
+              title="Copy link"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+              </svg>
             </button>
           </div>
+
+          <!-- Feedback Message -->
+          <p id="shareFeedback" role="status" aria-live="polite" class="hidden text-xs text-center text-indigo-300"></p>
         </div>
       </div>
 
@@ -791,11 +1031,26 @@ import Navigation from '../../components/Navigation.astro';
   </style>
 
   <script>
+    function getShareData() {
+      const shareUrl = window.location.href.split('#')[0];
+      return {
+        title: 'Universal Scam Checker - CyberBros',
+        text: 'Check if a transaction is a scam before it\'s too late! Free scam detection tool for buyers, sellers, and investors.',
+        url: shareUrl
+      };
+    }
+
     // Flashcard navigation
     let currentQuestionIndex = 1;
-    const totalQuestions = 7;
+    const totalQuestions = 8;
+    let showingResults = false;
 
     function updateQuestionDisplay() {
+      // If showing results, don't update question display
+      if (showingResults) {
+        return;
+      }
+
       // Hide all questions
       document.querySelectorAll('.question-card').forEach(card => {
         card.classList.remove('active');
@@ -840,10 +1095,11 @@ import Navigation from '../../components/Navigation.astro';
         1: 'userRole',
         2: 'paymentMethod',
         3: 'location',
-        4: 'communicationMedium',
-        5: 'unusualRequests',
-        6: 'socialEngineering',
-        7: 'partyInfo'
+        4: 'whoMeeting',
+        5: 'communicationMedium',
+        6: 'unusualRequests',
+        7: 'socialEngineering',
+        8: 'partyInfo'
       };
       return fieldMap[currentQuestionIndex];
     }
@@ -883,6 +1139,15 @@ import Navigation from '../../components/Navigation.astro';
         'secluded-area': '<strong>🚨 EXTREME DANGER:</strong> Legitimate businesses NEVER suggest secluded locations. This is a major warning sign for: Robbery setup, personal safety threat, kidnapping risk, crime in progress. Common scam: "My house is far, let\'s meet halfway at this deserted area." DO NOT PROCEED! If they insist on secluded location, report to police (997 or CCID at 03-2610 1559). Your safety is more important than any deal.',
         'keeps-changing': '<strong>Changing Location Red Flag:</strong> Constantly changing meeting locations indicates: Scammer trying to confuse you, avoiding areas with CCTV/witnesses, testing your compliance, disorganized fraud operation. Legitimate sellers have no reason to keep changing locations. This suggests they\'re not committed to the transaction or planning something suspicious. Demand a fixed public location or walk away.',
         'refuses-specify': '<strong>Location Secrecy Warning:</strong> Refusal to specify meeting location means: They don\'t have a real business, hiding identity or location, planning to scam and disappear, testing if you\'ll accept poor transparency. For online-only businesses, they should still provide registered business address. Any legitimate party will clearly state where business occurs. If they\'re vague, don\'t proceed.'
+      },
+      whoMeeting: {
+        'person-directly': '<strong>Direct Contact - Best Scenario:</strong> Meeting the person you\'ve been communicating with provides the best accountability. This is the ideal scenario because: They can\'t deny involvement later, you can verify their identity matches communications (photo, voice, etc.), direct accountability makes scams less likely. Still verify their identity: Request IC/business card, compare face with social media profiles, confirm phone number matches, get written documentation of transaction. Even with direct contact, follow standard safety precautions.',
+        'authorized-representative': '<strong>Authorized Representatives are Normal:</strong> For established businesses, dealing with authorized representatives is standard practice. However, proper verification is essential: 1) Request authorization letter on company letterhead specifying their authority, 2) Call the company directly using publicly listed number (not number they provide) to confirm employment, 3) Check employee on LinkedIn or company website, 4) Meet at company office when possible, 5) Get direct contact of their supervisor. Legitimate companies will readily provide all this information.',
+        'sending-someone-else': '<strong>🚨 CRITICAL RED FLAG - Sending Someone Else:</strong> When the person you\'ve been dealing with sends a "friend" or "family member" instead of coming themselves, this is a MAJOR warning sign in Malaysia. Why this is extremely suspicious: 1) <strong>Avoiding Identity Verification</strong> - Scammers don\'t want you to see their real face/identity, 2) <strong>Robbery Setup</strong> - Common tactic: "friend" robs you or takes item without paying, 3) <strong>Deniability</strong> - If caught, they claim "my friend acted alone", 4) <strong>Multiple Scam Accounts</strong> - One person manages multiple fake accounts. <strong>Common excuses:</strong> "I\'m busy at work", "I\'m outstation", "My friend is closer to you". <strong>Action:</strong> INSIST they come personally or do video call first. If they refuse, WALK AWAY - 95% scam probability. Legitimate sellers have no problem meeting personally for their own business.',
+        'courier-delivery': '<strong>Courier/Delivery Services - Verify First:</strong> Using professional courier services (J&T, Poslaju, DHL, etc.) is normal for e-commerce but has risks: <strong>Legitimate scenario:</strong> Established online seller with good reviews shipping via reputable courier, tracking number provided, can verify with courier company, marketplace platform involved (Shopee, Lazada). <strong>Scam scenarios:</strong> COD parcel scam (damaged/fake items inside), empty box scam, fake courier (scammer dresses as delivery person), overpayment refund scam. <strong>Protection:</strong> Open and inspect items BEFORE signing/paying, record unboxing video, use marketplace platforms with buyer protection, verify courier tracking is real, never pay extra fees to "courier" in cash.',
+        'unclear-evasive': '<strong>🚨 EXTREME WARNING - Being Evasive:</strong> If they refuse to clearly state who will meet you or keep avoiding the question, this is a CRITICAL red flag indicating: 1) <strong>No Real Person Exists</strong> - It\'s a fake identity/stolen profile, they can\'t meet because they\'re not who they claim, 2) <strong>Overseas Scam Operation</strong> - They\'re in another country running the scam, 3) <strong>Planning Something Malicious</strong> - Robbery, kidnapping, or other criminal activity, 4) <strong>Constantly Changing Story</strong> - Sign of disorganized scam operation. <strong>Legitimate parties are ALWAYS transparent about:</strong> Who will represent them, Their authorization/role, Contact details of the person meeting. <strong>If they\'re evasive:</strong> STOP ALL COMMUNICATION immediately, report to authorities if threatened, block all contact. This is 99% a scam - do not proceed under any circumstances.',
+        'online-no-meeting': '<strong>Online-Only Transactions:</strong> Many legitimate businesses operate entirely online. This is acceptable IF proper precautions are taken: <strong>For high-value items (>RM500):</strong> Request video call verification, use escrow services, use marketplace platforms with buyer protection, verify business registration with SSM. <strong>For any online transaction:</strong> Check extensive reviews from multiple sources, verify website/social media age and activity, use secure payment methods (credit card with chargeback protection), never use gift cards/cryptocurrency for purchases, keep all communication records. <strong>Red flags in online-only:</strong> Refuses video call for expensive items, no verifiable business presence, only accepts irreversible payment methods, pressure to buy immediately.',
+        'not-applicable': '<strong>Early Stage Transaction:</strong> If you haven\'t discussed meeting arrangements yet, that\'s normal for early conversations. However, when you DO discuss meeting: 1) Pay attention to their willingness to meet, 2) Watch for evasive behavior about who will meet, 3) Insist on meeting the person you\'ve been communicating with, 4) Request video call before any in-person meeting, 5) Set meeting in public place during daytime. Use this conversation as an opportunity to assess their legitimacy - how they respond to meeting requests reveals a lot about their intentions.'
       },
       communicationMedium: {
         'email': '<strong>Email Communication Security:</strong> Email is professional standard but vulnerabilities exist: Check sender domain carefully (maybank.com.my vs maybenk.com), look for SPF/DKIM authentication, hover over links before clicking, never download unexpected attachments, call company directly to verify important requests. In Malaysia, business email compromise (BEC) scams cost companies millions annually. Always verify payment instructions through separate channel.',
@@ -1000,6 +1265,67 @@ import Navigation from '../../components/Navigation.astro';
 
     // Handle button selections
     document.addEventListener('DOMContentLoaded', () => {
+    const copyShareLink = document.getElementById('copyShareLink');
+    const shareFeedback = document.getElementById('shareFeedback');
+    const socialShareLinks = document.querySelectorAll('.astro-social-share a.social-share-btn') as NodeListOf<HTMLAnchorElement>;
+      const disclaimerBanner = document.getElementById('disclaimerBanner');
+      const dismissDisclaimer = document.getElementById('dismissDisclaimer');
+      const DISCLAIMER_STORAGE_KEY = 'scamCheckerDisclaimerDismissed';
+
+      function showShareFeedback(message: string, isError = false) {
+        if (!shareFeedback) {
+          return;
+        }
+        shareFeedback.textContent = message;
+        shareFeedback.classList.remove('hidden');
+        if (isError) {
+          shareFeedback.classList.add('text-red-300');
+          shareFeedback.classList.remove('text-indigo-300');
+        } else {
+          shareFeedback.classList.remove('text-red-300');
+          shareFeedback.classList.add('text-indigo-300');
+        }
+      }
+
+      // Disclaimer dismissal handling
+      try {
+        if (localStorage.getItem(DISCLAIMER_STORAGE_KEY) === 'true') {
+          disclaimerBanner?.classList.add('hidden');
+        }
+      } catch (error) {
+        console.warn('Unable to read disclaimer preference', error);
+      }
+
+      dismissDisclaimer?.addEventListener('click', () => {
+        disclaimerBanner?.classList.add('hidden');
+        try {
+          localStorage.setItem(DISCLAIMER_STORAGE_KEY, 'true');
+        } catch (error) {
+          console.warn('Unable to persist disclaimer preference', error);
+        }
+      });
+
+      copyShareLink?.addEventListener('click', async () => {
+        const shareData = getShareData();
+        try {
+          if ('clipboard' in navigator && navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(shareData.url);
+            showShareFeedback('Link copied! Share it with someone who needs it.');
+          } else {
+            throw new Error('Clipboard API unavailable');
+          }
+        } catch (error) {
+          showShareFeedback('Copy failed. Use the share icons or copy manually.', true);
+          window.prompt('Copy this link to share', shareData.url);
+        }
+      });
+
+      socialShareLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          showShareFeedback('Opening your share option…');
+        });
+      });
+
       // Initialize first question
       updateQuestionDisplay();
 
@@ -1120,6 +1446,15 @@ import Navigation from '../../components/Navigation.astro';
         'secluded-area': 30,
         'keeps-changing': 25,
         'refuses-specify': 15
+      },
+      whoMeeting: {
+        'person-directly': 0,
+        'authorized-representative': 2,
+        'sending-someone-else': 28,
+        'courier-delivery': 5,
+        'unclear-evasive': 30,
+        'online-no-meeting': 3,
+        'not-applicable': 0
       },
       communicationMedium: {
         'email': 2,
@@ -1250,6 +1585,11 @@ import Navigation from '../../components/Navigation.astro';
           'refuses-specify': 'Refusal to specify location is a concerning red flag',
           'private-residence': 'Meeting at private residences carries personal safety risks'
         },
+        whoMeeting: {
+          'sending-someone-else': '🚨 CRITICAL: Sending someone else instead of coming personally is a major scam indicator - they are likely hiding their identity',
+          'unclear-evasive': '🚨 EXTREME WARNING: Being evasive about who will meet indicates fraud or malicious intent',
+          'courier-delivery': 'Courier delivery requires extra caution - inspect items carefully before payment'
+        },
         communicationMedium: {
           'sms': 'SMS-based business communication is highly unusual and suspicious',
           'whatsapp-group': '🚨 CRITICAL: WhatsApp group money schemes are nearly ALWAYS scams - the initial payment is bait',
@@ -1294,12 +1634,37 @@ import Navigation from '../../components/Navigation.astro';
       const redFlagsList = document.getElementById('redFlagsList');
       const recommendationsList = document.getElementById('recommendationsList');
       const navigationButtons = document.getElementById('navigationButtons');
+      const progressBar = document.getElementById('progressBar');
+      const currentQuestionSpan = document.getElementById('currentQuestion');
+      const totalQuestionsSpan = document.getElementById('totalQuestions');
+      const progressPercent = document.getElementById('progressPercent');
       
       if (!resultsDiv || !resultCard || !riskBadge || !riskScore || !summaryText || !redFlagsList || !recommendationsList) return;
       
-      // Hide navigation buttons and show results
+      // Set showing results flag
+      showingResults = true;
+      
+      // Hide all question cards
+      document.querySelectorAll('.question-card').forEach(card => {
+        card.classList.remove('active');
+      });
+      
+      // Show results as a flashcard
+      resultsDiv.classList.add('active');
+      
+      // Update progress to show completion
+      if (progressBar) progressBar.style.width = '100%';
+      if (currentQuestionSpan) currentQuestionSpan.textContent = 'Results';
+      if (totalQuestionsSpan) totalQuestionsSpan.textContent = '8';
+      if (progressPercent) progressPercent.textContent = '100';
+      
+      // Hide navigation buttons
       if (navigationButtons) navigationButtons.classList.add('hidden');
-      resultsDiv.classList.remove('hidden');
+      
+      // Scroll to top of results smoothly
+      setTimeout(() => {
+        resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
       
       let riskLevel: string;
       let riskColor: string;
@@ -1413,11 +1778,37 @@ import Navigation from '../../components/Navigation.astro';
         summaryText.parentElement?.appendChild(warningDiv);
       }
       
+      // Add courier/delivery tracking reminder if applicable
+      const whoMeeting = formAnswers['whoMeeting'];
+      if (whoMeeting === 'courier-delivery') {
+        const courierWarningDiv = document.createElement('div');
+        courierWarningDiv.className = 'mt-4 p-4 bg-blue-900/20 border-l-4 border-blue-500 rounded-r-lg';
+        courierWarningDiv.innerHTML = `
+          <div class="flex items-start">
+            <svg class="w-6 h-6 text-blue-400 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <div class="flex-1 text-gray-300 text-sm leading-relaxed">
+              <strong>📦 Courier/Delivery Service Reminder:</strong> Since the item will be delivered via courier, <strong>ALWAYS request and verify the tracking number</strong> before making any payment. Legitimate sellers will readily provide:
+              <ul class="mt-2 space-y-1 list-disc list-inside ml-4">
+                <li><strong>Valid tracking number</strong> that you can verify on the courier's official website/app</li>
+                <li><strong>Courier company name</strong> (J&T, Poslaju, DHL, Ninja Van, etc.)</li>
+                <li><strong>Expected delivery date</strong> and real-time tracking updates</li>
+                <li><strong>Proof of shipment</strong> (receipt or screenshot from courier)</li>
+              </ul>
+              <p class="mt-2"><strong>⚠️ Red Flags:</strong> Refuses to share tracking number, claims "courier doesn't provide tracking", tracking number is fake or doesn't work, asks for payment before shipping, uses unknown/unverifiable courier service.</p>
+              <p class="mt-2"><strong>✓ Best Practice:</strong> Only pay <strong>after</strong> you receive the tracking number and verify it's active on the courier's official platform. For COD, inspect items thoroughly before paying the delivery person.</p>
+            </div>
+          </div>
+        `;
+        summaryText.parentElement?.appendChild(courierWarningDiv);
+      }
+      
       // Display red flags
       if (redFlags.length > 0) {
         redFlagsList.innerHTML = redFlags.map(flag => 
-          `<li class="flex items-start text-gray-300">
-            <svg class="w-5 h-5 text-red-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          `<li class="flex items-start text-gray-300 text-sm">
+            <svg class="w-4 h-4 text-red-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
             ${flag}
@@ -1425,24 +1816,25 @@ import Navigation from '../../components/Navigation.astro';
         ).join('');
       } else {
         document.getElementById('redFlags')!.innerHTML = 
-          `<h3 class="text-xl font-semibold text-white mb-3 flex items-center">
-            <svg class="w-6 h-6 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          `<h3 class="text-base sm:text-lg font-semibold text-white mb-2 flex items-center">
+            <svg class="w-5 h-5 text-green-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
             No Major Red Flags
           </h3>
-          <p class="text-gray-300">No critical warning signs detected, but always maintain due diligence.</p>`;
+          <p class="text-gray-300 text-sm">No critical warning signs detected, but always maintain due diligence.</p>`;
       }
       
       // Display recommendations
       recommendationsList.innerHTML = recommendations.map(rec => 
-        `<li class="flex items-start text-gray-300">
-          <svg class="w-5 h-5 text-indigo-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        `<li class="flex items-start text-gray-300 text-sm">
+          <svg class="w-4 h-4 text-indigo-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
           </svg>
           ${rec}
         </li>`
       ).join('');
+      
     }
   </script>
 </MainLayout>
