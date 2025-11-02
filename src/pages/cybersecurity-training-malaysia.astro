@@ -9,6 +9,7 @@ import Contact from "../components/Contact.astro";
   title="Cybersecurity Training Malaysia | University & SME Courses | CyberBros KL"
   description="Professional cybersecurity training in Malaysia for universities and SMEs. Expert-led courses in ethical hacking, security awareness, secure coding, and security testing from Kuala Lumpur. Serving Malaysian universities, colleges, and small-medium enterprises across Selangor, Penang, Johor, and nationwide."
   keywords="cybersecurity training Malaysia, cybersecurity courses Kuala Lumpur, ethical hacking training Malaysia, security awareness training universities, cybersecurity workshops Malaysia universities, infosec training SME Malaysia, cybersecurity certification Malaysia, security training KL, IT security courses Malaysia, university cybersecurity training, SME security awareness Malaysia, secure coding training"
+  canonicalURL={new URL(Astro.url.pathname.replace(/\/$/, '') || '/', Astro.site).href}
 >
   <Navigation />
   

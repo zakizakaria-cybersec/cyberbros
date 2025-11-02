@@ -10,6 +10,7 @@ import "../styles/global.css";
   title="Privacy Policy | CyberBros Security - PDPA Compliant Data Protection"
   description="CyberBros Security privacy policy. Learn how we collect, use, and protect your personal data in compliance with Malaysian PDPA 2010."
   keywords="privacy policy, data protection, PDPA Malaysia, personal data, cybersecurity privacy"
+  canonicalURL={new URL(Astro.url.pathname.replace(/\/$/, '') || '/', Astro.site).href}
 >
   <Navigation />
   

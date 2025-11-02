@@ -14,6 +14,7 @@ import {
 <MainLayout 
   title="Universal Scam Checker - CyberBros | For Buyers, Sellers & Investors" 
   description="Free scam detection tool for any transaction. Check for red flags whether you're buying, selling, investing, or receiving payment. Covers WhatsApp group scams, payment fraud, and more."
+  canonicalURL={new URL(Astro.url.pathname.replace(/\/$/, '') || '/', Astro.site).href}
 >
   <Navigation />
   

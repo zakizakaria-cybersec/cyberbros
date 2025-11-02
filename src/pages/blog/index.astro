@@ -13,7 +13,11 @@ const posts = allPosts.sort(
 );
 ---
 
-<MainLayout title="Security Blog | CyberBros Security" description="Expert insights on cybersecurity, security training, and security best practices.">
+<MainLayout 
+  title="Security Blog | CyberBros Security" 
+  description="Expert insights on cybersecurity, security training, and security best practices."
+  canonicalURL={new URL(Astro.url.pathname.replace(/\/$/, '') || '/', Astro.site).href}
+>
   <Navigation />
   
   <section class="bg-gray-900 min-h-screen py-20">

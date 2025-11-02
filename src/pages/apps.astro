@@ -6,6 +6,7 @@ import Navigation from '../components/Navigation.astro';
 <MainLayout 
   title="Free Security Tools - CyberBros" 
   description="Free cybersecurity tools and apps to help protect your business from scams and fraud"
+  canonicalURL={new URL(Astro.url.pathname.replace(/\/$/, '') || '/', Astro.site).href}
 >
   <Navigation />
   

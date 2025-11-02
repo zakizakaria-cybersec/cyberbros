@@ -54,6 +54,7 @@ const structuredData = {
 <MainLayout 
   title={`${post.data.title} | CyberBros Security`}
   description={post.data.description}
+  canonicalURL={new URL(`/blog/${post.slug}`, Astro.site).href}
 >
   <!-- SEO Meta Tags -->
   <meta slot="head" property="og:type" content="article" />

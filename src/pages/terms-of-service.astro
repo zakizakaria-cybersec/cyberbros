@@ -10,6 +10,7 @@ import "../styles/global.css";
   title="Terms of Service | CyberBros Security Malaysia"
   description="Terms of Service for CyberBros Security. Read our terms and conditions for using our cybersecurity training services and website."
   keywords="terms of service, terms and conditions, legal, cybersecurity services, Malaysia"
+  canonicalURL={new URL(Astro.url.pathname.replace(/\/$/, '') || '/', Astro.site).href}
 >
   <Navigation />
   
