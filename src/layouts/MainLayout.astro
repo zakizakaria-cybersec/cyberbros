@@ -13,7 +13,7 @@ const {
   title = "Cybersecurity Services Malaysia | Training for Universities & SMEs | CyberBros",
   description = "Leading cybersecurity training provider in Malaysia specializing in universities and SMEs. Expert security awareness programs, ethical hacking courses, secure coding training, and cybersecurity education across Kuala Lumpur, Selangor, and Malaysia.",
   keywords = "cybersecurity services Malaysia, cybersecurity training Malaysia, security training universities Malaysia, SME cybersecurity Malaysia, ethical hacking Malaysia, security awareness training, cybersecurity education Malaysia, IT security training KL, infosec training Malaysia, secure coding Malaysia",
-  canonicalURL = new URL(Astro.url.pathname, Astro.site)
+  canonicalURL = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', Astro.site).href
 } = Astro.props;
 ---
 
