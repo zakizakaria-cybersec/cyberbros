@@ -1,0 +1,55 @@
+---
+interface Props {
+  email: string;
+  class?: string;
+  text?: string;
+}
+
+const { email, class: className = '', text } = Astro.props;
+
+// Split email to make it harder for simple scrapers
+const [localPart, domain] = email.split('@');
+const displayText = text || email;
+---
+
+<span 
+  class={`obfuscated-email ${className}`}
+  data-local={localPart}
+  data-domain={domain}
+>
+  {displayText}
+</span>
+
+<script>
+  // This script will run on the client side to reconstruct and handle email clicks
+  document.addEventListener('DOMContentLoaded', () => {
+    const emailElements = document.querySelectorAll('.obfuscated-email');
+    
+    emailElements.forEach((element) => {
+      const local = element.getAttribute('data-local');
+      const domain = element.getAttribute('data-domain');
+      
+      if (local && domain) {
+        const email = `${local}@${domain}`;
+        
+        // Make it look like a link
+        element.classList.add('cursor-pointer');
+        
+        // Handle click to open email client
+        element.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.location.href = `mailto:${email}`;
+        });
+        
+        // Optional: Show email on hover for better UX
+        element.setAttribute('title', `Email: ${email}`);
+      }
+    });
+  });
+</script>
+
+<style>
+  .obfuscated-email {
+    transition: all 0.3s ease;
+  }
+</style>

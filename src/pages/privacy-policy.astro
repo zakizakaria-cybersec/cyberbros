@@ -2,6 +2,7 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
+import ObfuscatedEmail from "../components/ObfuscatedEmail.astro";
 import "../styles/global.css";
 ---
 
@@ -148,7 +149,7 @@ import "../styles/global.css";
           </div>
 
           <p class="leading-relaxed mt-6">
-            To exercise these rights, contact us at: <a href="mailto:contact@cyberbrosecurity.work" class="text-indigo-400 hover:text-indigo-300">contact@cyberbrosecurity.work</a>
+            To exercise these rights, contact us at: <ObfuscatedEmail email="contact@cyberbrosecurity.work" class="text-indigo-400 hover:text-indigo-300" />
           </p>
         </div>
 
@@ -242,7 +243,7 @@ import "../styles/global.css";
           <div class="bg-indigo-900/20 border border-indigo-700/30 p-6 rounded-lg mt-4">
             <h3 class="font-semibold text-white mb-4">CyberBros Security</h3>
             <ul class="space-y-2 text-sm">
-              <li><strong class="text-white">Email:</strong> <a href="mailto:contact@cyberbrosecurity.work" class="text-indigo-400 hover:text-indigo-300">contact@cyberbrosecurity.work</a></li>
+              <li><strong class="text-white">Email:</strong> <ObfuscatedEmail email="contact@cyberbrosecurity.work" class="text-indigo-400 hover:text-indigo-300" /></li>
               <li><strong class="text-white">Location:</strong> Malaysia</li>
               <li><strong class="text-white">Response Time:</strong> We aim to respond within 5 business days</li>
             </ul>
