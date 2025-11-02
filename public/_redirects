@@ -1,5 +1,2 @@
 # Redirect www to non-www (301 permanent redirect)
 https://www.cyberbrosecurity.work/* https://cyberbrosecurity.work/:splat 301!
-
-# Handle trailing slashes - redirect to non-trailing slash version
-/*/ /:splat 301

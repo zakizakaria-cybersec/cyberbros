@@ -1,7 +1,13 @@
 import type { MiddlewareHandler } from 'astro';
+import { sequence } from 'astro:middleware';
 
 export const onRequest: MiddlewareHandler = async (context, next) => {
   const url = new URL(context.request.url);
+  
+  // Skip middleware completely for prerendered blog pages to avoid redirect loops
+  if (url.pathname === '/blog' || url.pathname.startsWith('/blog/')) {
+    return next();
+  }
   
   // Redirect www to non-www
   if (url.hostname.startsWith('www.')) {

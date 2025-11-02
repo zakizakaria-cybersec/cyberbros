@@ -13,7 +13,7 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   site: 'https://cyberbrosecurity.work',
-  trailingSlash: 'never', // Enforce consistent URL structure without trailing slashes
+  trailingSlash: 'ignore', // Let the system handle trailing slashes naturally
   integrations: [sitemap()],
   // Redirect www to non-www for canonical URLs
   redirects: {
