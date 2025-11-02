@@ -17,5 +17,24 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     return context.redirect(newUrl.toString(), 301);
   }
   
-  return next();
+  // Continue with the request
+  const response = await next();
+  
+  // Add security headers
+  response.headers.set(
+    'Strict-Transport-Security',
+    'max-age=31536000; includeSubDomains; preload'
+  );
+  
+  // Additional security headers
+  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.set('X-Frame-Options', 'DENY');
+  response.headers.set('X-XSS-Protection', '1; mode=block');
+  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  response.headers.set(
+    'Permissions-Policy',
+    'camera=(), microphone=(), geolocation=()'
+  );
+  
+  return response;
 };
