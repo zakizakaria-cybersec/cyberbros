@@ -42,5 +42,21 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     'camera=(), microphone=(), geolocation=()'
   );
   
+  // Content Security Policy (CSP)
+  // Note: 'unsafe-inline' and 'unsafe-eval' are needed for Astro/Vite in some cases
+  // Consider tightening this in production once you've tested thoroughly
+  response.headers.set(
+    'Content-Security-Policy',
+    "default-src 'self'; " +
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
+    "style-src 'self' 'unsafe-inline'; " +
+    "img-src 'self' data: https:; " +
+    "font-src 'self' data:; " +
+    "connect-src 'self'; " +
+    "frame-ancestors 'none'; " +
+    "base-uri 'self'; " +
+    "form-action 'self'"
+  );
+  
   return response;
 };

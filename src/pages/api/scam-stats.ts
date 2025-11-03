@@ -1,8 +1,18 @@
 import type { APIRoute } from 'astro';
+import { checkRateLimit, verifyOrigin, getClientIp } from '../../lib/security';
 
 interface Env {
   SCAM_CHECKER_KV?: KVNamespace;
+  RATE_LIMIT_KV?: KVNamespace;
 }
+
+// Allowed origins for CSRF protection
+const ALLOWED_ORIGINS = [
+  'https://cyberbrosecurity.work',
+  'https://www.cyberbrosecurity.work',
+  'http://localhost:4321', // For local development
+  'http://localhost:3000'
+];
 
 // GET endpoint to retrieve stats
 export const GET: APIRoute = async ({ locals }) => {
@@ -117,7 +127,45 @@ export const GET: APIRoute = async ({ locals }) => {
 // POST endpoint to increment counter
 export const POST: APIRoute = async ({ request, locals }) => {
   try {
+    // CSRF Protection: Verify origin
+    if (!verifyOrigin(request, ALLOWED_ORIGINS)) {
+      console.warn('CSRF attempt on scam-stats from:', request.headers.get('origin'));
+      return new Response(
+        JSON.stringify({ error: 'Invalid request origin' }),
+        { status: 403, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
     const runtime = locals.runtime as { env: Env } | undefined;
+    
+    // Rate Limiting: Prevent abuse (more lenient than contact form)
+    const clientIp = getClientIp(request);
+    const rateLimitKey = `scam_stats_rate_limit:${clientIp}`;
+    
+    const rateLimit = await checkRateLimit(
+      runtime?.env?.RATE_LIMIT_KV,
+      rateLimitKey,
+      20, // Max 20 checks
+      3600 // Per hour
+    );
+
+    if (rateLimit.limited) {
+      return new Response(
+        JSON.stringify({ 
+          success: false,
+          error: 'Too many checks. Please try again later.',
+          retryAfter: 3600 
+        }),
+        { 
+          status: 429, 
+          headers: { 
+            'Content-Type': 'application/json',
+            'Retry-After': '3600'
+          } 
+        }
+      );
+    }
+
     const kv = runtime?.env?.SCAM_CHECKER_KV;
 
     if (!kv) {
@@ -131,6 +179,14 @@ export const POST: APIRoute = async ({ request, locals }) => {
     // Get form data from request body
     const body = await request.json();
     const { userRole, communicationMedium, paymentMethod, socialEngineering } = body;
+
+    // Basic validation of input data
+    if (!userRole || !communicationMedium || !paymentMethod || !socialEngineering) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Missing required fields' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
 
     // Increment total counter
     const totalChecksStr = await kv.get('total_checks');
@@ -199,8 +255,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
     );
   } catch (error) {
     console.error('Error incrementing scam checker stats:', error);
+    // Generic error - don't expose internal details
     return new Response(
-      JSON.stringify({ success: false, error: 'Failed to update stats' }),
+      JSON.stringify({ success: false, error: 'Service temporarily unavailable' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }

@@ -5,11 +5,15 @@
 	"vars": {
 		"CONTACT_EMAIL": "contact@cyberbrosecurity.work"
 	},
-	  // Add this to your wrangler.jsonc
-  "kv_namespaces": [
-    {
-      "binding": "SCAM_CHECKER_KV",
-      "id": "146511db903244d0bec0bac86d002c97"
-    }
-  ]
+	// Add this to your wrangler.jsonc
+	"kv_namespaces": [
+		{
+			"binding": "SCAM_CHECKER_KV",
+			"id": "146511db903244d0bec0bac86d002c97"
+		},
+		{
+			"binding": "RATE_LIMIT_KV",
+			"id": "76f8f679ded8452db9972159e410bf88"
+		}
+	]
 }
