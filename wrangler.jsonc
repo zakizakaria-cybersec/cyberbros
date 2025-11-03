@@ -1,8 +1,18 @@
 {
-  "name": "cyberbros",
-  "compatibility_date": "2025-10-24",
-  "pages_build_output_dir": "./dist",
-  "vars": {
-    "CONTACT_EMAIL": "contact@cyberbrosecurity.work"
-  }
+	"name": "cyberbros",
+	"compatibility_date": "2025-10-24",
+	"pages_build_output_dir": "./dist",
+	"vars": {
+		"CONTACT_EMAIL": "contact@cyberbrosecurity.work"
+	},
+	  // Add this to your wrangler.jsonc
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "146511db903244d0bec0bac86d002c97",
+      
+      // Optional: preview_id used when running `wrangler dev` for local dev
+      "preview_id": "<ID_OF_PREVIEW_KV_NAMESPACE_FOR_LOCAL_DEVELOPMENT>"
+    }
+  ]
 }

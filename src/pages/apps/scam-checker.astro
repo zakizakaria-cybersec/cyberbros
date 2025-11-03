@@ -38,6 +38,40 @@ import {
         </p>
       </div>
 
+      <!-- Statistics Display -->
+      <div class="mb-8">
+        <div class="bg-gradient-to-br from-indigo-900/20 to-purple-900/20 border border-indigo-700/50 rounded-xl p-6">
+          <div class="text-center">
+            <h3 class="text-white font-semibold mb-4 flex items-center justify-center gap-2">
+              <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+              Community Impact
+            </h3>
+            <div class="grid grid-cols-2 gap-6 max-w-md mx-auto">
+              <div class="bg-gray-900/50 rounded-lg p-4">
+                <div id="totalChecks" class="text-3xl font-bold text-indigo-400 mb-1 animate-pulse">
+                  ---
+                </div>
+                <div class="text-gray-400 text-sm">Total Risk Checks</div>
+              </div>
+              <div class="bg-gray-900/50 rounded-lg p-4">
+                <div id="todayChecks" class="text-3xl font-bold text-purple-400 mb-1 animate-pulse">
+                  ---
+                </div>
+                <div class="text-gray-400 text-sm">Checks Today</div>
+              </div>
+            </div>
+            <p class="text-gray-400 text-xs mt-4 flex items-center justify-center gap-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+              </svg>
+              Helping Malaysians stay safe from scams
+            </p>
+          </div>
+        </div>
+      </div>
+
       <!-- Disclaimer -->
       <div id="disclaimerBanner" class="bg-yellow-900/20 border border-yellow-700/50 rounded-lg p-4 mb-8">
         <div class="flex items-start gap-3">
@@ -1264,6 +1298,69 @@ import {
       }
     };
 
+    // Load and display statistics
+    async function loadStats() {
+      try {
+        const response = await fetch('/api/scam-stats');
+        const data = await response.json();
+        
+        const totalChecksEl = document.getElementById('totalChecks');
+        const todayChecksEl = document.getElementById('todayChecks');
+        
+        if (totalChecksEl && todayChecksEl) {
+          // Animate the numbers
+          animateCounter(totalChecksEl, data.totalChecks || 0);
+          animateCounter(todayChecksEl, data.todayChecks || 0);
+        }
+      } catch (error) {
+        console.error('Failed to load stats:', error);
+        // Show fallback values
+        const totalChecksEl = document.getElementById('totalChecks');
+        const todayChecksEl = document.getElementById('todayChecks');
+        if (totalChecksEl) totalChecksEl.textContent = '---';
+        if (todayChecksEl) todayChecksEl.textContent = '---';
+      }
+    }
+
+    function animateCounter(element: HTMLElement, targetValue: number) {
+      const duration = 1500; // 1.5 seconds
+      const startValue = 0;
+      const startTime = performance.now();
+      
+      element.classList.remove('animate-pulse');
+      
+      function update(currentTime: number) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Ease out animation
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const currentValue = Math.floor(startValue + (targetValue - startValue) * easeOut);
+        
+        element.textContent = currentValue.toLocaleString();
+        
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        }
+      }
+      
+      requestAnimationFrame(update);
+    }
+
+    async function incrementStats() {
+      try {
+        await fetch('/api/scam-stats', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        // Reload stats after incrementing
+        setTimeout(loadStats, 500);
+      } catch (error) {
+        console.error('Failed to increment stats:', error);
+        // Don't block the user experience if stats fail
+      }
+    }
+
     // Handle button selections
     document.addEventListener('DOMContentLoaded', () => {
     const copyShareLink = document.getElementById('copyShareLink');
@@ -1272,6 +1369,9 @@ import {
       const disclaimerBanner = document.getElementById('disclaimerBanner');
       const dismissDisclaimer = document.getElementById('dismissDisclaimer');
       const DISCLAIMER_STORAGE_KEY = 'scamCheckerDisclaimerDismissed';
+
+      // Load stats on page load
+      loadStats();
 
       function showShareFeedback(message: string, isError = false) {
         if (!shareFeedback) {
@@ -1521,6 +1621,9 @@ import {
 
     document.getElementById('scamCheckerForm')?.addEventListener('submit', function(e) {
       e.preventDefault();
+      
+      // Increment stats counter
+      incrementStats();
       
       const formData = new FormData(e.target as HTMLFormElement);
       let totalScore = 0;
