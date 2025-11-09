@@ -1,0 +1,548 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Navigation from "../../components/Navigation.astro";
+import Footer from "../../components/Footer.astro";
+import Contact from "../../components/Contact.astro";
+---
+
+<MainLayout 
+  title="AI Security Training | LLM & Machine Learning Security Course | CyberBros Malaysia"
+  description="Professional AI and LLM security training in Malaysia. Learn to secure large language models, identify AI vulnerabilities, prompt injection defense, and ML system testing. Expert-led hands-on course for cybersecurity professionals."
+  keywords="AI security training, LLM security course, machine learning security, prompt injection training, AI vulnerability assessment, ChatGPT security, ML model security, AI cybersecurity Malaysia, generative AI security"
+  canonicalURL={new URL(Astro.url.pathname.replace(/\/$/, '') || '/', Astro.site).href}
+>
+  <Navigation />
+  
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-gray-900 via-indigo-950 to-black text-white py-24 px-6 overflow-hidden">
+    <!-- Animated background elements -->
+    <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+    
+    <div class="relative max-w-4xl mx-auto">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30">
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+        </svg>
+        <span class="text-sm font-medium text-yellow-300">TRENDING - Most In-Demand Skill 2025</span>
+      </div>
+      
+      <h1 class="text-4xl md:text-6xl font-bold mb-6">
+        <span class="bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent">
+          AI Security Training
+        </span>
+      </h1>
+      <p class="text-xl md:text-2xl mb-4 text-gray-300">
+        Master the security of Large Language Models, AI systems, and machine learning applications
+      </p>
+      <p class="text-lg mb-8 text-indigo-300">
+        As AI adoption explodes, organizations need security professionals who understand AI-specific vulnerabilities. This training equips you with cutting-edge skills to secure the AI revolution.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#modules" class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold px-8 py-4 rounded-md hover:from-indigo-500 hover:to-purple-500 transition transform hover:scale-105">
+          View Training Modules
+        </a>
+        <a href="#contact" class="border border-indigo-500 px-8 py-4 rounded-md hover:bg-indigo-950/50 hover:border-indigo-400 transition">
+          Enquire Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why This Training -->
+  <section class="py-20 px-6 bg-black">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Why AI Security Training Matters Now
+        </h2>
+        <p class="text-gray-400 text-lg max-w-3xl mx-auto">
+          The AI security landscape is evolving rapidly. Organizations implementing ChatGPT, LLMs, and ML systems face unique threats that traditional security approaches can't address.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-6 rounded-xl border border-indigo-500/30">
+          <div class="w-12 h-12 bg-indigo-600/20 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Explosive Market Demand</h3>
+          <p class="text-gray-400">
+            AI security specialists are among the highest-paid cybersecurity roles in 2025. Companies desperately need professionals who can secure their AI implementations.
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-6 rounded-xl border border-indigo-500/30">
+          <div class="w-12 h-12 bg-indigo-600/20 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">New Threat Landscape</h3>
+          <p class="text-gray-400">
+            Prompt injection, model poisoning, adversarial inputs, and data leakage through LLMs are real threats requiring specialized security knowledge.
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-6 rounded-xl border border-indigo-500/30">
+          <div class="w-12 h-12 bg-indigo-600/20 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Career Differentiation</h3>
+          <p class="text-gray-400">
+            Stand out in a crowded cybersecurity market. AI security expertise positions you as a forward-thinking professional ready for the future.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Learning Objectives -->
+  <section class="py-20 px-6 bg-gray-950">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          What You'll Master
+        </h2>
+        <p class="text-gray-400 text-lg">
+          Practical skills to identify, exploit, and defend AI systems in real-world scenarios
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="flex gap-4">
+          <div class="flex-shrink-0">
+            <div class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-white mb-2">Identify AI-Specific Vulnerabilities</h3>
+            <p class="text-gray-400">Learn to recognize and exploit unique security flaws in LLMs, chatbots, and AI-powered applications that traditional scanners miss.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div class="flex-shrink-0">
+            <div class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-white mb-2">Execute Prompt Injection Attacks</h3>
+            <p class="text-gray-400">Master advanced prompt engineering techniques to bypass AI guardrails, manipulate outputs, and extract sensitive information.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div class="flex-shrink-0">
+            <div class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-white mb-2">Assess ML Model Security</h3>
+            <p class="text-gray-400">Evaluate machine learning models for poisoning, adversarial attacks, and data leakage vulnerabilities using practical testing methods.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div class="flex-shrink-0">
+            <div class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-white mb-2">Secure AI Integrations</h3>
+            <p class="text-gray-400">Design and implement security controls for AI APIs, RAG systems, and enterprise AI deployments to prevent exploitation.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div class="flex-shrink-0">
+            <div class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-white mb-2">Understand OWASP Top 10 for LLMs</h3>
+            <p class="text-gray-400">Deep dive into the OWASP LLM Top 10 vulnerabilities with hands-on exploitation and mitigation strategies.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div class="flex-shrink-0">
+            <div class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-white mb-2">Conduct AI Security Assessments</h3>
+            <p class="text-gray-400">Perform comprehensive security testing of AI systems and produce professional assessment reports with actionable recommendations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Training Modules -->
+  <section id="modules" class="py-20 px-6 bg-black">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Training Modules
+        </h2>
+        <p class="text-gray-400 text-lg">
+          Comprehensive curriculum covering the full spectrum of AI security
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        <!-- Module 1 -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-xl border border-indigo-500/30 hover:border-indigo-500/50 transition">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+              01
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-semibold text-white mb-3">AI Security Fundamentals</h3>
+              <p class="text-gray-400 mb-4">
+                Build foundational knowledge of how AI systems work, their architecture, and where security risks emerge. Understand LLM basics, transformer models, and AI deployment patterns.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">LLM Architecture</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">AI/ML Basics</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Deployment Models</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Threat Modeling</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-xl border border-indigo-500/30 hover:border-indigo-500/50 transition">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+              02
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-semibold text-white mb-3">Prompt Injection & Manipulation</h3>
+              <p class="text-gray-400 mb-4">
+                Master the art of prompt injection attacks. Learn direct and indirect injection techniques, jailbreaking methods, and how to bypass content filters and safety mechanisms.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Direct Injection</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Indirect Injection</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Jailbreaking</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Filter Bypass</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-xl border border-indigo-500/30 hover:border-indigo-500/50 transition">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+              03
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-semibold text-white mb-3">Data Leakage & Privacy Attacks</h3>
+              <p class="text-gray-400 mb-4">
+                Discover how sensitive information leaks through AI systems. Extract training data, exploit memory vulnerabilities, and understand privacy risks in LLM deployments.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Training Data Extraction</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">PII Leakage</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Context Poisoning</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Memory Attacks</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Module 4 -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-xl border border-indigo-500/30 hover:border-indigo-500/50 transition">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+              04
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-semibold text-white mb-3">Model Poisoning & Adversarial ML</h3>
+              <p class="text-gray-400 mb-4">
+                Explore attacks on the ML pipeline. Understand data poisoning, model backdoors, adversarial examples, and supply chain attacks targeting AI systems.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Data Poisoning</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Adversarial Examples</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Model Backdoors</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Evasion Attacks</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Module 5 -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-xl border border-indigo-500/30 hover:border-indigo-500/50 transition">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+              05
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-semibold text-white mb-3">AI API & Integration Security</h3>
+              <p class="text-gray-400 mb-4">
+                Secure the interfaces to AI systems. Test AI APIs, RAG implementations, plugin architectures, and third-party AI integrations for vulnerabilities.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">API Testing</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">RAG Security</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Plugin Exploits</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Supply Chain</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Module 6 -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-xl border border-indigo-500/30 hover:border-indigo-500/50 transition">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+              06
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-semibold text-white mb-3">Defense & Secure AI Implementation</h3>
+              <p class="text-gray-400 mb-4">
+                Learn to build secure AI systems. Implement input validation, output sanitization, secure prompt design, monitoring, and defensive architectures.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Input Validation</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Guardrails</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Monitoring</span>
+                <span class="px-3 py-1 bg-indigo-600/20 text-indigo-300 text-sm rounded-full">Best Practices</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Should Attend -->
+  <section class="py-20 px-6 bg-gray-950">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Who Should Attend
+        </h2>
+        <p class="text-gray-400 text-lg">
+          This training is designed for professionals looking to specialize in AI security
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-6 rounded-xl border border-gray-800">
+          <div class="w-12 h-12 bg-indigo-600/20 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Security Professionals</h3>
+          <p class="text-gray-400">
+            Penetration testers, security analysts, and consultants wanting to expand into AI security testing and assessments.
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-6 rounded-xl border border-gray-800">
+          <div class="w-12 h-12 bg-indigo-600/20 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">AI/ML Engineers</h3>
+          <p class="text-gray-400">
+            Developers building AI systems who need to understand security implications and implement secure AI applications.
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-6 rounded-xl border border-gray-800">
+          <div class="w-12 h-12 bg-indigo-600/20 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Security Architects</h3>
+          <p class="text-gray-400">
+            Professionals designing secure AI systems and need comprehensive knowledge of AI-specific threats and controls.
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-6 rounded-xl border border-gray-800">
+          <div class="w-12 h-12 bg-indigo-600/20 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Compliance Officers</h3>
+          <p class="text-gray-400">
+            GRC professionals responsible for ensuring AI systems meet security and regulatory requirements.
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-6 rounded-xl border border-gray-800">
+          <div class="w-12 h-12 bg-indigo-600/20 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">University Students</h3>
+          <p class="text-gray-400">
+            Computer science and cybersecurity students wanting to gain cutting-edge skills in the fastest-growing security domain.
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-6 rounded-xl border border-gray-800">
+          <div class="w-12 h-12 bg-indigo-600/20 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Career Switchers</h3>
+          <p class="text-gray-400">
+            IT professionals transitioning into cybersecurity and looking to enter with specialized, high-demand skills.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-12 bg-gradient-to-r from-indigo-900/30 to-purple-900/30 border border-indigo-500/30 rounded-xl p-8 text-center">
+        <h3 class="text-2xl font-bold text-white mb-3">Prerequisites</h3>
+        <p class="text-gray-300 mb-2">
+          Basic understanding of cybersecurity concepts and web application fundamentals recommended
+        </p>
+        <p class="text-indigo-300 text-sm">
+          No prior AI/ML experience required - we'll cover the essentials
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Training Format -->
+  <section class="py-20 px-6 bg-black">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Training Format
+        </h2>
+        <p class="text-gray-400 text-lg">
+          Hands-on, practical learning with real-world scenarios
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-xl border border-indigo-500/30">
+          <h3 class="text-xl font-semibold text-white mb-4">Course Duration</h3>
+          <p class="text-3xl font-bold text-indigo-400 mb-2">3-5 Days</p>
+          <p class="text-gray-400">Intensive immersive training with flexible scheduling options</p>
+        </div>
+
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-xl border border-indigo-500/30">
+          <h3 class="text-xl font-semibold text-white mb-4">Hands-On Labs</h3>
+          <p class="text-3xl font-bold text-indigo-400 mb-2">70%+</p>
+          <p class="text-gray-400">Majority of time spent on practical exercises and real exploits</p>
+        </div>
+
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-xl border border-indigo-500/30">
+          <h3 class="text-xl font-semibold text-white mb-4">Delivery Options</h3>
+          <ul class="text-gray-400 space-y-2">
+            <li class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-indigo-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              On-site at your location
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-indigo-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Live online instructor-led
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-indigo-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Custom corporate training
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-xl border border-indigo-500/30">
+          <h3 class="text-xl font-semibold text-white mb-4">What You Get</h3>
+          <ul class="text-gray-400 space-y-2">
+            <li class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-indigo-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Course materials & lab guides
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-indigo-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Access to lab environments
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-indigo-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Certificate of completion
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-indigo-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Post-training support
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12 text-center">
+        <p class="text-gray-400 mb-6 text-lg">
+          All training can be customized to meet your organization's specific needs and use cases
+        </p>
+        <a href="#contact" class="inline-block bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold px-10 py-4 rounded-md hover:from-indigo-500 hover:to-purple-500 transition transform hover:scale-105">
+          Request Training Information
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Contact />
+  <Footer />
+</MainLayout>
+
+<style>
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+</style>
