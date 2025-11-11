@@ -7,11 +7,29 @@
       <img src="/favicon-32x32.png" alt="CyberBros Logo" class="w-8 h-8" />
       <span class="text-xl font-bold text-white">CyberBros</span>
     </a>
-    <ul class="hidden md:flex gap-8 text-sm">
+    <ul class="hidden md:flex gap-8 text-sm items-center">
       <li><a href="/#services" class="text-gray-300 hover:text-indigo-400 transition">Services</a></li>
       <li><a href="/about" class="text-gray-300 hover:text-indigo-400 transition">About Us</a></li>
       <li><a href="/faq" class="text-gray-300 hover:text-indigo-400 transition">FAQ</a></li>
       <li><a href="/blog" class="text-gray-300 hover:text-indigo-400 transition">Blog</a></li>
+      <li class="relative group">
+        <button class="text-gray-300 hover:text-indigo-400 transition flex items-center gap-1">
+          Training
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="absolute top-full left-0 mt-2 w-64 bg-gray-900 border border-gray-800 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+          <a href="/training/ai-security" class="block px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-indigo-400 transition border-b border-gray-800">
+            <div class="font-medium">AI Security Training</div>
+            <div class="text-xs text-gray-500 mt-1">3-5 Days • Intermediate to Advanced</div>
+          </a>
+          <a href="/training/embedded-systems-security" class="block px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-indigo-400 transition">
+            <div class="font-medium">Embedded Systems Security</div>
+            <div class="text-xs text-gray-500 mt-1">5-7 Days • Intermediate to Advanced</div>
+          </a>
+        </div>
+      </li>
       <li><a href="/apps" class="text-gray-300 hover:text-indigo-400 transition">Apps</a></li>
       <li><a href="/#contact" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-500 transition">Contact</a></li>
     </ul>
@@ -23,25 +41,55 @@
   </div>
 </nav>
 
+<div id="mobile-menu" class="hidden md:hidden flex-col bg-black border-t border-gray-800 p-6 gap-4">
+  <a href="/#services" class="text-gray-300 hover:text-indigo-400 transition">Services</a>
+  <a href="/about" class="text-gray-300 hover:text-indigo-400 transition">About Us</a>
+  <a href="/faq" class="text-gray-300 hover:text-indigo-400 transition">FAQ</a>
+  <a href="/blog" class="text-gray-300 hover:text-indigo-400 transition">Blog</a>
+  <div class="flex flex-col gap-2">
+    <button id="mobile-training-toggle" class="text-gray-300 hover:text-indigo-400 transition flex items-center gap-1 justify-between">
+      Training
+      <svg class="w-4 h-4 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+      </svg>
+    </button>
+    <div id="mobile-training-submenu" class="hidden flex-col gap-2 pl-4 border-l-2 border-gray-800">
+      <a href="/training/ai-security" class="text-gray-400 hover:text-indigo-400 transition text-sm">
+        <div>AI Security Training</div>
+        <div class="text-xs text-gray-600">3-5 Days</div>
+      </a>
+      <a href="/training/embedded-systems-security" class="text-gray-400 hover:text-indigo-400 transition text-sm">
+        <div>Embedded Systems Security</div>
+        <div class="text-xs text-gray-600">5-7 Days</div>
+      </a>
+    </div>
+  </div>
+  <a href="/apps" class="text-gray-300 hover:text-indigo-400 transition">Apps</a>
+  <a href="/#contact" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-500 transition text-center">Contact</a>
+</div>
+
 <script>
   // Mobile menu toggle
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-  const nav = document.querySelector('nav ul');
+  const mobileMenu = document.getElementById('mobile-menu');
   
-  if (mobileMenuBtn && nav) {
+  if (mobileMenuBtn && mobileMenu) {
     mobileMenuBtn.addEventListener('click', () => {
-      nav.classList.toggle('hidden');
-      nav.classList.toggle('flex');
-      nav.classList.toggle('flex-col');
-      nav.classList.toggle('absolute');
-      nav.classList.toggle('top-full');
-      nav.classList.toggle('left-0');
-      nav.classList.toggle('w-full');
-      nav.classList.toggle('bg-black');
-      nav.classList.toggle('border-t');
-      nav.classList.toggle('border-gray-800');
-      nav.classList.toggle('p-6');
-      nav.classList.toggle('gap-4');
+      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.toggle('flex');
+    });
+  }
+
+  // Mobile training submenu toggle
+  const trainingToggle = document.getElementById('mobile-training-toggle');
+  const trainingSubmenu = document.getElementById('mobile-training-submenu');
+  const trainingArrow = trainingToggle?.querySelector('svg');
+  
+  if (trainingToggle && trainingSubmenu) {
+    trainingToggle.addEventListener('click', () => {
+      trainingSubmenu.classList.toggle('hidden');
+      trainingSubmenu.classList.toggle('flex');
+      trainingArrow?.classList.toggle('rotate-180');
     });
   }
 </script>

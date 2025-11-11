@@ -4,8 +4,10 @@ import { sequence } from 'astro:middleware';
 export const onRequest: MiddlewareHandler = async (context, next) => {
   const url = new URL(context.request.url);
   
-  // Skip middleware completely for prerendered blog pages to avoid redirect loops
-  if (url.pathname === '/blog' || url.pathname.startsWith('/blog/')) {
+  // Skip middleware completely for prerendered blog and training pages to avoid redirect loops
+  if (url.pathname === '/blog' || url.pathname.startsWith('/blog/') ||
+      url.pathname === '/training' || url.pathname.startsWith('/training/') ||
+      url.pathname === '/cybersecurity-training-malaysia') {
     return next();
   }
   
