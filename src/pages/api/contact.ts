@@ -11,6 +11,8 @@ import {
 interface Env {
   CONTACT_EMAIL?: string;
   RESEND_API_KEY?: string;
+  DIFY_API_KEY?: string;
+  DIFY_API_URL?: string;
   RATE_LIMIT_KV?: KVNamespace;
 }
 
@@ -137,6 +139,53 @@ export const POST: APIRoute = async ({ request, locals }) => {
       : 'Not provided';
     const sanitizedMessage = escapeHtml(messageValidation.sanitized).replace(/\n/g, '<br>');
 
+    // Generate draft response using Dify
+    let draftResponse = '';
+    const difyApiKey = runtime?.env?.DIFY_API_KEY;
+    const difyApiUrl = runtime?.env?.DIFY_API_URL;
+
+    if (difyApiKey && difyApiUrl) {
+      try {
+        const difyResponse = await fetch(difyApiUrl, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${difyApiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            inputs: {
+              name: nameValidation.sanitized,
+              email: email.trim(),
+              institution: institutionValidation.sanitized || 'Not provided',
+              message: messageValidation.sanitized
+            },
+            response_mode: 'blocking',
+            user: `contact-form-${Date.now()}`
+          }),
+        });
+
+        if (difyResponse.ok) {
+          const difyData = await difyResponse.json();
+          // Check for common output keys 'text' or 'response'
+          draftResponse = difyData.data.outputs.text || difyData.data.outputs.response || '';
+        } else {
+          console.error('Dify API error:', difyResponse.status);
+        }
+      } catch (difyError) {
+        console.error('Failed to call Dify:', difyError);
+      }
+    }
+
+    // Prepare the "Reply with Draft" mailto link
+    // We use encodeURIComponent to ensure the draft is safely placed in the URL
+    const mailtoSubject = encodeURIComponent(`Re: Contact Form - ${nameValidation.sanitized}`);
+    const rawDraft = draftResponse || `Hi ${nameValidation.sanitized},\n\nThank you for reaching out. We received your message regarding "${institutionValidation.sanitized || 'your inquiry'}".\n\nBest regards,\nCyberBro Security`;
+    const mailtoBody = encodeURIComponent(rawDraft);
+    const mailtoLink = `mailto:${email.trim()}?subject=${mailtoSubject}&body=${mailtoBody}`;
+
+    // Format draft for display in the notification email (HTML)
+    const displayDraft = draftResponse ? escapeHtml(draftResponse).replace(/\n/g, '<br>') : '';
+
     // Send email using Resend
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -156,6 +205,20 @@ export const POST: APIRoute = async ({ request, locals }) => {
           <p><strong>Institution:</strong> ${sanitizedInstitution}</p>
           <h3>Message:</h3>
           <p>${sanitizedMessage}</p>
+          
+          ${displayDraft ? `
+          <div style="margin-top: 30px; padding: 20px; background-color: #f5f5f5; border-radius: 5px; border-left: 4px solid #4f46e5;">
+            <h3 style="margin-top: 0; color: #4f46e5;">🤖 AI Drafted Response</h3>
+            <p style="font-style: italic; color: #555;">Review the draft below. Click the button to open your email client with this text pre-filled.</p>
+            <div style="background: white; padding: 15px; border: 1px solid #ddd; border-radius: 3px; margin-bottom: 15px;">
+              ${displayDraft}
+            </div>
+            <a href="${mailtoLink}" style="display: inline-block; background-color: #4f46e5; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+              Open Draft in Email Client
+            </a>
+          </div>
+          ` : ''}
+
           <hr style="margin: 20px 0; border: none; border-top: 1px solid #ccc;">
           <p style="font-size: 12px; color: #666;">
             <strong>PDPA Compliance:</strong> User has provided consent for data processing as required by Malaysian PDPA 2010.
