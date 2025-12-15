@@ -4,7 +4,7 @@
 	"pages_build_output_dir": "./dist",
 	"vars": {
 		"CONTACT_EMAIL": "contact@cyberbrosecurity.work",
-		"DIFY_API_URL": "http://dify.jeki.uk/v1/workflows/run/"
+		"DIFY_API_URL": "http://dify.jeki.uk/v1/workflows/run"
 	},
 	// Add this to your wrangler.jsonc
 	"kv_namespaces": [

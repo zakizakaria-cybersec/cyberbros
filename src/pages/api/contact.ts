@@ -144,8 +144,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const difyApiKey = runtime?.env?.DIFY_API_KEY;
     const difyApiUrl = runtime?.env?.DIFY_API_URL;
 
+    console.log('Dify config check:', { 
+      hasApiKey: !!difyApiKey, 
+      hasApiUrl: !!difyApiUrl,
+      apiUrl: difyApiUrl 
+    });
+
     if (difyApiKey && difyApiUrl) {
       try {
+        console.log('Calling Dify API...');
         const difyResponse = await fetch(difyApiUrl, {
           method: 'POST',
           headers: {
@@ -164,16 +171,23 @@ export const POST: APIRoute = async ({ request, locals }) => {
           }),
         });
 
+        console.log('Dify response status:', difyResponse.status);
+
         if (difyResponse.ok) {
           const difyData = await difyResponse.json();
+          console.log('Dify response data:', JSON.stringify(difyData, null, 2));
           // Check for common output keys 'text' or 'response'
-          draftResponse = difyData.data.outputs.text || difyData.data.outputs.response || '';
+          draftResponse = difyData?.data?.outputs?.text || difyData?.data?.outputs?.response || '';
+          console.log('Extracted draft response:', draftResponse ? 'Found' : 'Empty');
         } else {
-          console.error('Dify API error:', difyResponse.status);
+          const errorBody = await difyResponse.text();
+          console.error(`Dify API error (${difyResponse.status}):`, errorBody);
         }
       } catch (difyError) {
         console.error('Failed to call Dify:', difyError);
       }
+    } else {
+      console.warn('Dify not configured - missing API key or URL');
     }
 
     // Prepare the "Reply with Draft" mailto link
